@@ -4,7 +4,7 @@
 
 ---
 
-## [Useful Django Codeblock Patterns](https://github.com/MinhCreator/useful-snippets/django-snippet/)
+## [Useful Django Codeblock Patterns](https://github.com/MinhCreator/useful-snippets/snippets/django-snippet/)
 
 # Useful Django Codeblock Patterns
 
@@ -1406,7 +1406,7 @@ urlpatterns = [
 
 ---
 
-## [Useful Node.js & Express.js Codeblock Patterns](https://github.com/MinhCreator/useful-snippets/expressjs-snippet/)
+## [Useful Node.js & Express.js Codeblock Patterns](https://github.com/MinhCreator/useful-snippets/snippets/expressjs-snippet/)
 
 # Useful Node.js & Express.js Codeblock Patterns
 
@@ -2680,7 +2680,7 @@ module.exports = { cache, client };
 
 ---
 
-## [Useful FastAPI Codeblock Patterns](https://github.com/MinhCreator/useful-snippets/fastapi-snippet/)
+## [Useful FastAPI Codeblock Patterns](https://github.com/MinhCreator/useful-snippets/snippets/fastapi-snippet/)
 
 # Useful FastAPI Codeblock Patterns
 
@@ -4069,7 +4069,7 @@ else:
 
 ---
 
-## [Home](https://github.com/MinhCreator/useful-snippets/)
+## [Home](https://github.com/MinhCreator/useful-snippets/snippets/)
 
 ---
 title: "Home"
@@ -4135,7 +4135,7 @@ Happy coding! 🎉
 
 ---
 
-## [Java Snippets](https://github.com/MinhCreator/useful-snippets/java-snippet/)
+## [Java Snippets](https://github.com/MinhCreator/useful-snippets/snippets/java-snippet/)
 
 # Java Snippets
 
@@ -7065,7 +7065,7 @@ public int sum(Tree tree) {
 
 ---
 
-## [JavaScript Snippets](https://github.com/MinhCreator/useful-snippets/javascript-snippet/)
+## [JavaScript Snippets](https://github.com/MinhCreator/useful-snippets/snippets/javascript-snippet/)
 
 # JavaScript Snippets
 
@@ -9646,7 +9646,7 @@ if (!window.requestIdleCallback) {
 
 ---
 
-## [Useful Next.js Codeblock Patterns](https://github.com/MinhCreator/useful-snippets/nextjs-snippet/)
+## [Useful Next.js Codeblock Patterns](https://github.com/MinhCreator/useful-snippets/snippets/nextjs-snippet/)
 
 # Useful Next.js Codeblock Patterns
 
@@ -11206,7 +11206,7 @@ export function middleware(request) {
 
 ---
 
-## [Useful Python Codeblock Patterns](https://github.com/MinhCreator/useful-snippets/python-snippet/)
+## [Useful Python Codeblock Patterns](https://github.com/MinhCreator/useful-snippets/snippets/python-snippet/)
 
 # Useful Python Codeblock Patterns
 
@@ -12662,7 +12662,7 @@ class TradingPipeline:
 
 ---
 
-## [CORE CONCEPTS](https://github.com/MinhCreator/useful-snippets/reactjs-cheatsheet/)
+## [CORE CONCEPTS](https://github.com/MinhCreator/useful-snippets/snippets/reactjs-cheatsheet/)
 
 # CORE CONCEPTS
 
@@ -13731,7 +13731,7 @@ function App() {
 
 ---
 
-## [Useful ReactJS Codeblock Snippets](https://github.com/MinhCreator/useful-snippets/reactjs-snippet-code/)
+## [Useful ReactJS Codeblock Snippets](https://github.com/MinhCreator/useful-snippets/snippets/reactjs-snippet-code/)
 
 # Useful ReactJS Codeblock Snippets
 
@@ -15255,7 +15255,7 @@ test('increments count when button is clicked', () => {
 
 ---
 
-## [Useful ReactJS Snippets](https://github.com/MinhCreator/useful-snippets/reactjs-snippet/)
+## [Useful ReactJS Snippets](https://github.com/MinhCreator/useful-snippets/snippets/reactjs-snippet/)
 
 # Useful ReactJS Snippets
 
@@ -15619,7 +15619,7 @@ test('increments count when button is clicked', () => {
 
 ---
 
-## [Code Snippets](https://github.com/MinhCreator/useful-snippets/snippets/)
+## [Code Snippets](https://github.com/MinhCreator/useful-snippets/snippets/snippets/)
 
 ---
 title: "Code Snippets"
@@ -15700,7 +15700,7 @@ Happy coding! 🎉
 
 ---
 
-## [TypeScript Snippets](https://github.com/MinhCreator/useful-snippets/typescript-snippet/)
+## [TypeScript Snippets](https://github.com/MinhCreator/useful-snippets/snippets/typescript-snippet/)
 
 # TypeScript Snippets
 

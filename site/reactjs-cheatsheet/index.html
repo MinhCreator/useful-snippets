@@ -1,0 +1,1599 @@
+<!--
+  ---------------------------------------------------------------
+  docmd : the zero-config documentation engine.
+  @website https://docmd.io
+  [docmd-source] - Please do not remove this header.
+  ---------------------------------------------------------------
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="docmd v0.5.x">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>/**
+ * --------------------------------------------------------------------
+ * docmd : the zero-config documentation engine.
+ *
+ * @package     @docmd/core (and ecosystem)
+ * @website     https://docmd.io
+ * @repository  https://github.com/docmd-io/docmd
+ * @license     MIT
+ * @copyright   Copyright (c) 2025-present docmd.io
+ *
+ * [docmd-source] - Please do not remove this header.
+ * --------------------------------------------------------------------
+ */
+
+(function () {
+  try {
+    // 1. Determine Theme
+    var localValue = localStorage.getItem('docmd-theme');
+    var configValue = window.DOCMD_DEFAULT_MODE || 'light';
+    var theme = localValue ? localValue : configValue;
+
+    if (theme === 'system') {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // 2. Apply to Root
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // 3. Highlight.js Toggle Strategy
+    var lightLink = document.getElementById('hljs-light');
+    var darkLink = document.getElementById('hljs-dark');
+
+    if (lightLink && darkLink) {
+      if (theme === 'dark') {
+        lightLink.disabled = true;
+        darkLink.disabled = false;
+      } else {
+        lightLink.disabled = false;
+        darkLink.disabled = true;
+      }
+    }
+
+    document.documentElement.style.visibility = "visible";
+  } catch (e) {
+    document.documentElement.style.visibility = "visible";
+    console.error('Theme init failed', e);
+  }
+})();</script>
+    <style>
+      html {
+        visibility: hidden;
+      }
+    </style>
+    
+    <script>
+      var root = "../";
+      if (root && !root.endsWith('/')) root += '/';
+      if (root === '') root = './';
+      window.DOCMD_ROOT = root;
+
+      var siteRoot = "../";
+      if (siteRoot && !siteRoot.endsWith('/')) siteRoot += '/';
+      if (siteRoot === '') siteRoot = './';
+      window.DOCMD_SITE_ROOT = siteRoot;
+
+      window.DOCMD_APPEARANCE = "system";
+      window.DOCMD_VERSION_ROOT = "/";
+      window.DOCMD_BASE = "/";
+      window.DOCMD_LOCALE = "";
+      window.DOCMD_DEFAULT_LOCALE = "";
+    </script>
+    <title>
+      CORE CONCEPTS : Universal Useful Snippets
+    </title>
+    
+    <link rel="stylesheet" href="../assets/css/docmd-main.css?v=mprs2l3l">
+    
+    <link rel="stylesheet" href="../assets/css/docmd-git.css?v=mprs2l3l">
+    
+    <link rel="stylesheet" href="../assets/css/docmd-highlight-light.css?v=mprs2l3l" id="hljs-light" >
+    <link rel="stylesheet" href="../assets/css/docmd-highlight-dark.css?v=mprs2l3l" id="hljs-dark" disabled>
+    
+    
+<meta name="description" content="Documentation built with docmd.">
+<link rel="canonical" href="https://github.com/MinhCreator/useful-snippets/reactjs-cheatsheet/">
+<meta property="og:title" content="CORE CONCEPTS - Universal Useful Snippets">
+<meta property="og:description" content="Documentation built with docmd.">
+<meta property="og:url" content="https://github.com/MinhCreator/useful-snippets/reactjs-cheatsheet/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CORE CONCEPTS - Universal Useful Snippets">
+<meta name="twitter:description" content="Documentation built with docmd.">
+
+
+
+<link rel="stylesheet" href="../assets/css/docmd-git.css?v=mprs2l3l" >
+<link rel="stylesheet" href="../assets/css/docmd-openapi.css?v=mprs2l3l" >
+
+    
+    <script>/**
+ * --------------------------------------------------------------------
+ * docmd : the zero-config documentation engine.
+ *
+ * @package     @docmd/core (and ecosystem)
+ * @website     https://docmd.io
+ * @repository  https://github.com/docmd-io/docmd
+ * @license     MIT
+ * @copyright   Copyright (c) 2025-present docmd.io
+ *
+ * [docmd-source] - Please do not remove this header.
+ * --------------------------------------------------------------------
+ */
+
+(function () {
+  try {
+    // 1. Determine Theme
+    var localValue = localStorage.getItem('docmd-theme');
+    var configValue = window.DOCMD_DEFAULT_MODE || 'light';
+    var theme = localValue ? localValue : configValue;
+
+    if (theme === 'system') {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // 2. Apply to Root
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // 3. Highlight.js Toggle Strategy
+    var lightLink = document.getElementById('hljs-light');
+    var darkLink = document.getElementById('hljs-dark');
+
+    if (lightLink && darkLink) {
+      if (theme === 'dark') {
+        lightLink.disabled = true;
+        darkLink.disabled = false;
+      } else {
+        lightLink.disabled = false;
+        darkLink.disabled = true;
+      }
+    }
+
+    document.documentElement.style.visibility = "visible";
+  } catch (e) {
+    document.documentElement.style.visibility = "visible";
+    console.error('Theme init failed', e);
+  }
+})();</script>
+  </head>
+  <body
+    class="sidebar-collapsible"
+    data-default-collapsed="true"
+    data-copy-code-enabled="true" data-spa-enabled="true" data-source-file="docs/reactjs-cheatsheet.md">
+
+    <a href="#main-content" class="skip-link">skipToContent</a>
+
+    
+    
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          
+            <h1><a href="../">
+                Universal Useful Snippets
+              </a></h1>
+          
+          <span class="mobile-view sidebar-menu-button float-right">
+            
+<svg class="lucide-icon icon-menu " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-menu"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 5h16" />
+  <path d="M4 12h16" />
+  <path d="M4 19h16" />
+</svg>
+
+          </span>
+        </div>
+        <div class="sidebar-top-group">
+          
+          
+            <div class="sidebar-options-wrapper">
+              
+
+
+<div class="docmd-options-menu">
+    
+    <button class="docmd-search-trigger" aria-label="search">
+        
+<svg class="lucide-icon icon-search " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-search"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" />
+</svg>
+
+        <span class="search-label">search</span>
+        <span class="search-keys"><kbd class="docmd-kbd">⌘</kbd><kbd class="docmd-kbd">K</kbd></span>
+    </button>
+    
+
+    
+
+    
+
+    
+    <button class="theme-toggle-button" aria-label="toggleTheme">
+        
+<svg class="lucide-icon icon-sun icon-sun" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-sun"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+ 
+<svg class="lucide-icon icon-moon icon-moon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-moon"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+</svg>
+
+    </button>
+    
+
+    
+</div>
+
+            </div>
+          
+          
+          
+        </div>
+        
+
+<nav class="sidebar-nav" aria-label="mainNavigation">
+  <ul>
+    
+      <li class="" >
+      
+        <a href="../" class=" "
+          >
+           
+<svg class="lucide-icon icon-home " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-house"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Introduction
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../snippets/" class=" "
+          >
+           
+<svg class="lucide-icon icon-code " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-code"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m16 18 6-6-6-6" />
+  <path d="m8 6-6 6 6 6" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Snippets
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="https://github.com/MinhCreator/useful-snippets" class=" "
+          target=&quot;_blank&quot; rel=&quot;noopener&quot;>
+           
+<svg class="lucide-icon icon-github " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-github"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+  <path d="M9 18c-4.51 2-5-2-7-2" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            GitHub
+            </span>
+          
+           
+<svg class="lucide-icon icon-external-link nav-external-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-external-link"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 3h6v6" />
+  <path d="M10 14 21 3" />
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+</svg>
+
+          
+        </a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+        <div class="sidebar-bottom-group mt-auto">
+          
+          
+          
+          
+        </div>
+      </aside>
+      
+      <div class="main-content-wrapper">
+        
+        
+          <header class="page-header">
+            <div class="header-left">
+              
+                <button id="sidebar-toggle-button" class="sidebar-toggle-button"
+                  aria-label="toggleSidebar">
+                  
+<svg class="lucide-icon icon-chevron-left " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-left"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m15 18-6-6 6-6" />
+</svg>
+
+                </button>
+              
+              <div class="header-titles-wrapper">
+                <span class="header-title">
+                  CORE CONCEPTS
+                </span>
+              </div>
+            </div>
+            <div class="header-right">
+              
+            </div>
+          </header>
+        
+        <div class="content-theme-cover">
+          <main class="content-area" id="main-content">
+            <div class="content-layout">
+              <div class="main-content">
+                
+                
+                <h1 id="core-concepts">CORE CONCEPTS</h1>
+<h2 id="core-concepts-các-element-và-jsx" class="docmd-heading"><a href="#core-concepts-các-element-và-jsx" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Các element và JSX</h2>
+<p>Cú pháp căn bản cho một React element:</p>
+<pre class="hljs"><code><span class="hljs-comment">// In a nutshell, JSX allows us to write HTML in our JS</span>
+<span class="hljs-comment">// JSX can use any valid html tags (i.e. div/span, h1-h6, form/input, etc)</span>
+<span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>Hello React<span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>
+</code></pre>
+<p>Cú pháp JSX là expressions:</p>
+<pre class="hljs"><code><span class="hljs-comment">// as an expression, JSX can be assigned to variables...</span>
+<span class="hljs-keyword">const</span> greeting <span class="hljs-punctuation">=</span> <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>Hello React<span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>;
+
+<span class="hljs-keyword">const</span> isNewToReact <span class="hljs-punctuation">=</span> <span class="hljs-keyword">true</span>;
+
+<span class="hljs-comment">// ... or can be displayed conditionally</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">sayGreeting</span>() {
+  <span class="hljs-keyword">if</span> (isNewToReact) {
+    <span class="hljs-comment">// ... or returned from functions, etc.</span>
+    <span class="hljs-keyword">return</span> greeting; <span class="hljs-comment">// displays: Hello React</span>
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>Hi again, React<span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>;
+  }
+}
+</code></pre>
+<p>JSX cho phép nest expressions:</p>
+<pre class="hljs"><code><span class="hljs-keyword">const</span> year <span class="hljs-punctuation">=</span> <span class="hljs-number">2020</span>;
+<span class="hljs-comment">// we can insert primitive JS values in curly braces: {}</span>
+<span class="hljs-keyword">const</span> greeting <span class="hljs-punctuation">=</span> <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>Hello React <span class="hljs-keyword">in</span> {year}<span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>;
+<span class="hljs-comment">// trying to insert objects will result in an error</span>
+</code></pre>
+<p>JSX cho phép nest các elements:</p>
+<pre class="hljs"><code><span class="hljs-comment">// to write JSX on multiple lines, wrap in parentheses: ()</span>
+<span class="hljs-keyword">const</span> greeting <span class="hljs-punctuation">=</span> (
+  <span class="hljs-comment">// div is the parent element</span>
+  <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>
+    {<span class="hljs-comment">/* h1 and p are child elements */</span>}
+    <span class="hljs-punctuation">&lt;</span>h1<span class="hljs-punctuation">&gt;</span>Hello<span class="hljs-punctuation">!&lt;/</span>h1<span class="hljs-punctuation">&gt;</span>
+    <span class="hljs-punctuation">&lt;</span>p<span class="hljs-punctuation">&gt;</span>Welcome to React<span class="hljs-punctuation">&lt;/</span>p<span class="hljs-punctuation">&gt;</span>
+  <span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>
+);
+<span class="hljs-comment">// &#039;parents&#039; and &#039;children&#039; are how we describe JSX elements in relation</span>
+<span class="hljs-comment">// to one another, like we would talk about HTML elements</span>
+</code></pre>
+<p>HTML và JSX có sự khác biệt một ít về cú pháp:</p>
+<pre class="hljs"><code><span class="hljs-comment">// Empty div is not &lt;div&gt;&lt;/div&gt; (HTML), but &lt;div/&gt; (JSX)</span>
+<span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">/&gt;</span>
+
+<span class="hljs-comment">// A single tag element like input is not &lt;input&gt; (HTML), but &lt;input/&gt; (JSX)</span>
+<span class="hljs-punctuation">&lt;</span>input name<span class="hljs-punctuation">=</span><span class="hljs-string">&quot;email&quot;</span> <span class="hljs-punctuation">/&gt;</span>
+
+<span class="hljs-comment">// Attributes are written in camelcase for JSX (like JS variables)</span>
+<span class="hljs-punctuation">&lt;</span>button className<span class="hljs-punctuation">=</span><span class="hljs-string">&quot;submit-button&quot;</span><span class="hljs-punctuation">&gt;</span>Submit<span class="hljs-punctuation">&lt;/</span>button<span class="hljs-punctuation">&gt;</span> <span class="hljs-comment">// not &#039;class&#039; (HTML)</span>
+</code></pre>
+<p>App React cơ bản nhất yêu cầu 3 thứ:</p>
+<ul>
+<li><code>ReactDOM.render()</code> để render app</li>
+<li>Một JSX element (được gọi là root node)</li>
+<li>Một DOM element để mount app (thường là một div với một id của root trong index.html file)</li>
+</ul>
+<pre class="hljs"><code><span class="hljs-comment">// imports needed if using NPM package; not if from CDN links</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+<span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-dom&quot;</span>;
+
+<span class="hljs-keyword">const</span> greeting <span class="hljs-punctuation">=</span> <span class="hljs-punctuation">&lt;</span>h1<span class="hljs-punctuation">&gt;</span>Hello React<span class="hljs-punctuation">&lt;/</span>h1<span class="hljs-punctuation">&gt;</span>;
+
+<span class="hljs-comment">// ReactDOM.render(root node, mounting point)</span>
+ReactDOM.<span class="hljs-title function_">render</span>(greeting, document.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;root&quot;</span>));
+</code></pre>
+<hr>
+<h2 id="core-concepts-component-và-prop-của-react" class="docmd-heading"><a href="#core-concepts-component-và-prop-của-react" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Component và Prop của React</h2>
+<p>Cấu trúc cho một component React cơ bản:</p>
+<pre class="hljs"><code><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+
+<span class="hljs-comment">// 1st component type: function component</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Header</span>() {
+  <span class="hljs-comment">// function components must be capitalized unlike normal JS functions</span>
+  <span class="hljs-comment">// note the capitalized name here: &#039;Header&#039;</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-punctuation">&lt;</span>h1<span class="hljs-punctuation">&gt;</span>Hello React<span class="hljs-punctuation">&lt;/</span>h1<span class="hljs-punctuation">&gt;</span>;
+}
+
+<span class="hljs-comment">// function components with arrow functions are also valid</span>
+<span class="hljs-keyword">const</span> Header <span class="hljs-punctuation">=</span> () <span class="hljs-punctuation">=&gt;</span> <span class="hljs-punctuation">&lt;</span>h1<span class="hljs-punctuation">&gt;</span>Hello React<span class="hljs-punctuation">&lt;/</span>h1<span class="hljs-punctuation">&gt;</span>;
+
+<span class="hljs-comment">// 2nd component type: class component</span>
+<span class="hljs-comment">// (classes are another type of function)</span>
+<span class="hljs-keyword">class</span> Header <span class="hljs-keyword">extends</span> React.<span class="hljs-attr">Component</span> {
+  <span class="hljs-comment">// class components have more boilerplate (with extends and render method)</span>
+  <span class="hljs-title function_">render</span>() {
+    <span class="hljs-keyword">return</span> <span class="hljs-punctuation">&lt;</span>h1<span class="hljs-punctuation">&gt;</span>Hello React<span class="hljs-punctuation">&lt;/</span>h1<span class="hljs-punctuation">&gt;</span>;
+  }
+}
+</code></pre>
+<p>Cách sử dụng components:</p>
+<pre class="hljs"><code><span class="hljs-comment">// do we call these function components like normal functions?</span>
+
+<span class="hljs-comment">// No, to execute them and display the JSX they return...</span>
+<span class="hljs-keyword">const</span> Header <span class="hljs-punctuation">=</span> () <span class="hljs-punctuation">=&gt;</span> <span class="hljs-punctuation">&lt;</span>h1<span class="hljs-punctuation">&gt;</span>Hello React<span class="hljs-punctuation">&lt;/</span>h1<span class="hljs-punctuation">&gt;</span>;
+
+<span class="hljs-comment">// ...we use them as &#039;custom&#039; JSX elements</span>
+ReactDOM.<span class="hljs-title function_">render</span>(<span class="hljs-punctuation">&lt;</span>Header <span class="hljs-punctuation">/&gt;</span>, document.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;root&quot;</span>));
+<span class="hljs-comment">// renders: &lt;h1&gt;Hello React&lt;/h1&gt;</span>
+</code></pre>
+<p>Component có thể sử dụng lại trong app:</p>
+<pre class="hljs"><code><span class="hljs-comment">// for example, this Header component can be reused in any app page</span>
+
+<span class="hljs-comment">// this component shown for the &#039;/&#039; route</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">IndexPage</span>() {
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>Header <span class="hljs-punctuation">/&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>Hero <span class="hljs-punctuation">/&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>Footer <span class="hljs-punctuation">/&gt;</span>
+    <span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>
+  );
+}
+
+<span class="hljs-comment">// shown for the &#039;/about&#039; route</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">AboutPage</span>() {
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>Header <span class="hljs-punctuation">/&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>About <span class="hljs-punctuation">/&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>Testimonials <span class="hljs-punctuation">/&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>Footer <span class="hljs-punctuation">/&gt;</span>
+    <span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>
+  );
+}
+</code></pre>
+<p>Data có thể chuyển đến component với prop:</p>
+<pre class="hljs"><code><span class="hljs-comment">// What if we want to pass data to our component from a parent?</span>
+<span class="hljs-comment">// I.e. to pass a user&#039;s name to display in our Header?</span>
+
+<span class="hljs-keyword">const</span> username <span class="hljs-punctuation">=</span> <span class="hljs-string">&quot;John&quot;</span>;
+
+<span class="hljs-comment">// we add custom &#039;attributes&#039; called props</span>
+ReactDOM.<span class="hljs-title function_">render</span>(
+  <span class="hljs-punctuation">&lt;</span>Header username<span class="hljs-punctuation">=</span>{username} <span class="hljs-punctuation">/&gt;</span>,
+  document.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;root&quot;</span>)
+);
+<span class="hljs-comment">// we called this prop &#039;username&#039;, but can use any valid JS identifier</span>
+
+<span class="hljs-comment">// props is the object that every component receives as an argument</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Header</span>(props) {
+  <span class="hljs-comment">// the props we make on the component (i.e. username)</span>
+  <span class="hljs-comment">// become properties on the props object</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-punctuation">&lt;</span>h1<span class="hljs-punctuation">&gt;</span>Hello {props.<span class="hljs-attr">username</span>}<span class="hljs-punctuation">&lt;/</span>h1<span class="hljs-punctuation">&gt;</span>;
+}
+</code></pre>
+<p>Props không thể thay đổi được (mutated):</p>
+<pre class="hljs"><code><span class="hljs-comment">// Components must ideally be &#039;pure&#039; functions.</span>
+<span class="hljs-comment">// That is, for every input, we be able to expect the same output</span>
+
+<span class="hljs-comment">// we cannot do the following with props:</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Header</span>(props) {
+  <span class="hljs-comment">// we cannot mutate the props object, we can only read from it</span>
+  props.<span class="hljs-attr">username</span> <span class="hljs-punctuation">=</span> <span class="hljs-string">&quot;Doug&quot;</span>;
+
+  <span class="hljs-keyword">return</span> <span class="hljs-punctuation">&lt;</span>h1<span class="hljs-punctuation">&gt;</span>Hello {props.<span class="hljs-attr">username</span>}<span class="hljs-punctuation">&lt;/</span>h1<span class="hljs-punctuation">&gt;</span>;
+}
+<span class="hljs-comment">// But what if we want to modify a prop value that comes in?</span>
+<span class="hljs-comment">// That&#039;s where we would use state (see the useState section)</span>
+</code></pre>
+<p>Chúng ta có thể dùng children prop khi muốn chuyển element/component như là props đến các component khác:</p>
+<pre class="hljs"><code><span class="hljs-comment">// Can we accept React elements (or components) as props?</span>
+<span class="hljs-comment">// Yes, through a special property on the props object called &#039;children&#039;</span>
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Layout</span>(props) {
+  <span class="hljs-keyword">return</span> <span class="hljs-punctuation">&lt;</span>div className<span class="hljs-punctuation">=</span><span class="hljs-string">&quot;container&quot;</span><span class="hljs-punctuation">&gt;</span>{props.<span class="hljs-attr">children</span>}<span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>;
+}
+
+<span class="hljs-comment">// The children prop is very useful for when you want the same</span>
+<span class="hljs-comment">// component (such as a Layout component) to wrap all other components:</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">IndexPage</span>() {
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>Layout<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>Header <span class="hljs-punctuation">/&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>Hero <span class="hljs-punctuation">/&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>Footer <span class="hljs-punctuation">/&gt;</span>
+    <span class="hljs-punctuation">&lt;/</span>Layout<span class="hljs-punctuation">&gt;</span>
+  );
+}
+
+<span class="hljs-comment">// different page, but uses same Layout component (thanks to children prop)</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">AboutPage</span>() {
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>Layout<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>About <span class="hljs-punctuation">/&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>Footer <span class="hljs-punctuation">/&gt;</span>
+    <span class="hljs-punctuation">&lt;/</span>Layout<span class="hljs-punctuation">&gt;</span>
+  );
+}
+</code></pre>
+<p>Hiển thị có điều kiện các components với ternaries và short-circuiting:</p>
+<pre class="hljs"><code><span class="hljs-comment">// if-statements are fine to conditionally show , however...</span>
+<span class="hljs-comment">// ...only ternaries (seen below) allow us to insert these conditionals</span>
+<span class="hljs-comment">// in JSX, however</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Header</span>() {
+  <span class="hljs-keyword">const</span> isAuthenticated <span class="hljs-punctuation">=</span> <span class="hljs-title function_">checkAuth</span>();
+
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>nav<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>Logo <span class="hljs-punctuation">/&gt;</span>
+      {<span class="hljs-comment">/* if isAuth is true, show AuthLinks. If false, Login  */</span>}
+      {isAuthenticated <span class="hljs-punctuation">?</span> <span class="hljs-punctuation">&lt;</span>AuthLinks <span class="hljs-punctuation">/&gt;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&lt;</span>Login <span class="hljs-punctuation">/&gt;</span>}
+      {<span class="hljs-comment">/* if isAuth is true, show Greeting. If false, nothing. */</span>}
+      {isAuthenticated <span class="hljs-punctuation">&amp;&amp;</span> <span class="hljs-punctuation">&lt;</span>Greeting <span class="hljs-punctuation">/&gt;</span>}
+    <span class="hljs-punctuation">&lt;/</span>nav<span class="hljs-punctuation">&gt;</span>
+  );
+}
+</code></pre>
+<p>Fragment là các components được dùng để hiển thị các loại component mà không cần thêm element vào DOM. Fragments phù hợp với conditional logic:</p>
+<pre class="hljs"><code><span class="hljs-comment">// we can improve the logic in the previous example</span>
+<span class="hljs-comment">// if isAuthenticated is true, how do we display both AuthLinks and Greeting?</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Header</span>() {
+  <span class="hljs-keyword">const</span> isAuthenticated <span class="hljs-punctuation">=</span> <span class="hljs-title function_">checkAuth</span>();
+
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>nav<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>Logo <span class="hljs-punctuation">/&gt;</span>
+      {<span class="hljs-comment">/* we can render both components with a fragment */</span>}
+      {<span class="hljs-comment">/* fragments are very concise: &lt;&gt; &lt;/&gt; */</span>}
+      {isAuthenticated <span class="hljs-punctuation">?</span> (
+        <span class="hljs-punctuation">&lt;&gt;</span>
+          <span class="hljs-punctuation">&lt;</span>AuthLinks <span class="hljs-punctuation">/&gt;</span>
+          <span class="hljs-punctuation">&lt;</span>Greeting <span class="hljs-punctuation">/&gt;</span>
+        <span class="hljs-punctuation">&lt;/&gt;</span>
+      ) <span class="hljs-punctuation">:</span> (
+        <span class="hljs-punctuation">&lt;</span>Login <span class="hljs-punctuation">/&gt;</span>
+      )}
+    <span class="hljs-punctuation">&lt;/</span>nav<span class="hljs-punctuation">&gt;</span>
+  );
+}
+</code></pre>
+<hr>
+<h2 id="core-concepts-list-và-key" class="docmd-heading"><a href="#core-concepts-list-và-key" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>List và key</h2>
+<p>Dùng <code>.map()</code> để chuyển mảng list of data vào list of elements:</p>
+<pre class="hljs"><code><span class="hljs-keyword">const</span> people <span class="hljs-punctuation">=</span> [<span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-string">&quot;Fred&quot;</span>];
+<span class="hljs-keyword">const</span> peopleList <span class="hljs-punctuation">=</span> people.<span class="hljs-title function_">map</span>(person <span class="hljs-punctuation">=&gt;</span> <span class="hljs-punctuation">&lt;</span>p<span class="hljs-punctuation">&gt;</span>{person}<span class="hljs-punctuation">&lt;/</span>p<span class="hljs-punctuation">&gt;</span>);
+</code></pre>
+<p><code>.map()</code> cũng được dùng cho components như là elements:</p>
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-keyword">const</span> people <span class="hljs-punctuation">=</span> [<span class="hljs-string">&#039;John&#039;</span>, <span class="hljs-string">&#039;Bob&#039;</span>, <span class="hljs-string">&#039;Fred&#039;</span>];
+  <span class="hljs-comment">// can interpolate returned list of elements in {}</span>
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>ul<span class="hljs-punctuation">&gt;</span>
+      {<span class="hljs-comment">/* we&#039;re passing each array element as props */</span>}
+      {people.<span class="hljs-title function_">map</span>(person <span class="hljs-punctuation">=&gt;</span> <span class="hljs-punctuation">&lt;</span>Person name<span class="hljs-punctuation">=</span>{person} <span class="hljs-punctuation">/&gt;</span>}
+    <span class="hljs-punctuation">&lt;/</span>ul<span class="hljs-punctuation">&gt;</span>
+  );
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Person</span>({ name }) {
+  <span class="hljs-comment">// gets &#039;name&#039; prop using object destructuring</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-punctuation">&lt;</span>p<span class="hljs-punctuation">&gt;</span><span class="hljs-keyword">this</span> person&#039;s name is<span class="hljs-punctuation">:</span> {name}<span class="hljs-punctuation">&lt;/</span>p<span class="hljs-punctuation">&gt;</span>;
+}
+</code></pre>
+<p>Mỗi React element được lặp lại cần một <code>key</code> props. Keys là nhân tố cần thiết để React theo dõi từng element được lặp lại với map. Nếu không có Keys thì sẽ khó để update các element khi data thay đổi. Và Keys phải là các giá trị duy nhất để thể hiện rằng các elements này tách biệt với nhau.</p>
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-keyword">const</span> people <span class="hljs-punctuation">=</span> [<span class="hljs-string">&#039;John&#039;</span>, <span class="hljs-string">&#039;Bob&#039;</span>, <span class="hljs-string">&#039;Fred&#039;</span>];
+
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>ul<span class="hljs-punctuation">&gt;</span>
+      {<span class="hljs-comment">/* keys need to be primitive values, ideally a generated id */</span>}
+      {people.<span class="hljs-title function_">map</span>(person <span class="hljs-punctuation">=&gt;</span> <span class="hljs-punctuation">&lt;</span>Person key<span class="hljs-punctuation">=</span>{person} name<span class="hljs-punctuation">=</span>{person} <span class="hljs-punctuation">/&gt;</span>)}
+    <span class="hljs-punctuation">&lt;/</span>ul<span class="hljs-punctuation">&gt;</span>
+  );
+}
+
+<span class="hljs-comment">// If you don&#039;t have ids with your set of data or unique primitive values,</span>
+<span class="hljs-comment">// you can use the second parameter of .map() to get each elements index</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-keyword">const</span> people <span class="hljs-punctuation">=</span> [<span class="hljs-string">&#039;John&#039;</span>, <span class="hljs-string">&#039;Bob&#039;</span>, <span class="hljs-string">&#039;Fred&#039;</span>];
+
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>ul<span class="hljs-punctuation">&gt;</span>
+      {<span class="hljs-comment">/* use array element index for key */</span>}
+      {people.<span class="hljs-title function_">map</span>((person, i) <span class="hljs-punctuation">=&gt;</span> <span class="hljs-punctuation">&lt;</span>Person key<span class="hljs-punctuation">=</span>{i} name<span class="hljs-punctuation">=</span>{person} <span class="hljs-punctuation">/&gt;</span>)}
+    <span class="hljs-punctuation">&lt;/</span>ul<span class="hljs-punctuation">&gt;</span>
+  );
+}
+</code></pre>
+<hr>
+<h2 id="core-concepts-events-và-event-handlers" class="docmd-heading"><a href="#core-concepts-events-và-event-handlers" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Events và Event Handlers</h2>
+<p>Events trong React và HTML có sự khác biệt nhỏ:</p>
+<pre class="hljs"><code><span class="hljs-comment">// Note: most event handler functions start with &#039;handle&#039;</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">handleToggleTheme</span>() {
+  <span class="hljs-comment">// code to toggle app theme</span>
+}
+
+<span class="hljs-comment">// in html, onclick is all lowercase</span>
+<span class="hljs-punctuation">&lt;</span>button onclick<span class="hljs-punctuation">=</span><span class="hljs-string">&quot;handleToggleTheme()&quot;</span><span class="hljs-punctuation">&gt;</span>
+  Submit
+<span class="hljs-punctuation">&lt;/</span>button<span class="hljs-punctuation">&gt;</span>
+
+<span class="hljs-comment">// in JSX, onClick is camelcase, like attributes / props</span>
+<span class="hljs-comment">// we also pass a reference to the function with curly braces</span>
+<span class="hljs-punctuation">&lt;</span>button onClick<span class="hljs-punctuation">=</span>{handleToggleTheme}<span class="hljs-punctuation">&gt;</span>
+  Submit
+<span class="hljs-punctuation">&lt;/</span>button<span class="hljs-punctuation">&gt;</span>
+</code></pre>
+<p>Hai thứ quan trọng nhất trong React events là <code>onClick</code> và <code>onChange</code>:</p>
+<ul>
+<li><code>onClick</code> xử lý click events trên JSX element (được gọi là buttons)</li>
+<li><code>onChange</code> thì xử lý keyboard events (được gọi là inputs)</li>
+</ul>
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleChange</span>(event) {
+    <span class="hljs-comment">// when passing the function to an event handler, like onChange</span>
+    <span class="hljs-comment">// we get access to data about the event (an object)</span>
+    <span class="hljs-keyword">const</span> inputText <span class="hljs-punctuation">=</span> event.<span class="hljs-attr">target</span>.<span class="hljs-attr">value</span>;
+    <span class="hljs-keyword">const</span> inputName <span class="hljs-punctuation">=</span> event.<span class="hljs-attr">target</span>.<span class="hljs-attr">name</span>; <span class="hljs-comment">// myInput</span>
+    <span class="hljs-comment">// we get the text typed in and other data from event.target</span>
+  }
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleSubmit</span>() {
+    <span class="hljs-comment">// on click doesn&#039;t usually need event data</span>
+  }
+
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>input <span class="hljs-keyword">type</span><span class="hljs-punctuation">=</span><span class="hljs-string">&quot;text&quot;</span> name<span class="hljs-punctuation">=</span><span class="hljs-string">&quot;myInput&quot;</span> onChange<span class="hljs-punctuation">=</span>{handleChange} <span class="hljs-punctuation">/&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>button onClick<span class="hljs-punctuation">=</span>{handleSubmit}<span class="hljs-punctuation">&gt;</span>Submit<span class="hljs-punctuation">&lt;/</span>button<span class="hljs-punctuation">&gt;</span>
+    <span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>
+  );
+}
+</code></pre>
+<hr>
+<h1 id="react-hooks">React Hooks</h1>
+<h2 id="react-hooks-state-và-usestate" class="docmd-heading"><a href="#react-hooks-state-và-usestate" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>State và useState</h2>
+<p><code>useState</code> cho phép chúng ta khai báo local state trong Function Component:</p>
+<pre class="hljs"><code><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#039;react&#039;</span>;
+
+<span class="hljs-comment">// create state variable</span>
+<span class="hljs-comment">// syntax: const [stateVariable] = React.useState(defaultValue);</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-keyword">const</span> [language] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>(<span class="hljs-string">&#039;javascript&#039;</span>);
+  <span class="hljs-comment">// we use array destructuring to declare state variable</span>
+
+  <span class="hljs-keyword">return</span> <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>I am learning {language}<span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>;
+}
+</code></pre>
+<p>Ghi chú: Bất kỳ hook trong phần này được lấy từ React package và có thể import riêng lẻ.</p>
+<pre class="hljs"><code><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-keyword">const</span> [language] <span class="hljs-punctuation">=</span> <span class="hljs-title function_">useState</span>(<span class="hljs-string">&quot;javascript&quot;</span>);
+
+  <span class="hljs-keyword">return</span> <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>I am learning {language}<span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>;
+}
+</code></pre>
+<p><code>useState</code> cũng cho chúng ta chức năng ‘setter’ để update các state mà nó tạo:</p>
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-comment">// the setter function is always the second destructured value</span>
+  <span class="hljs-keyword">const</span> [language, setLanguage] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>(<span class="hljs-string">&quot;python&quot;</span>);
+  <span class="hljs-comment">// the convention for the setter name is &#039;setStateVariable&#039;</span>
+
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>
+      {<span class="hljs-comment">/*  why use an arrow function here instead onClick={setterFn()} ? */</span>}
+      <span class="hljs-punctuation">&lt;</span>button onClick<span class="hljs-punctuation">=</span>{() <span class="hljs-punctuation">=&gt;</span> <span class="hljs-title function_">setLanguage</span>(<span class="hljs-string">&quot;javascript&quot;</span>)}<span class="hljs-punctuation">&gt;</span>
+        Change language to JS
+      <span class="hljs-punctuation">&lt;/</span>button<span class="hljs-punctuation">&gt;</span>
+      {<span class="hljs-comment">/*  if not, setLanguage would be called immediately and not on click */</span>}
+      <span class="hljs-punctuation">&lt;</span>p<span class="hljs-punctuation">&gt;</span>I am now learning {language}<span class="hljs-punctuation">&lt;/</span>p<span class="hljs-punctuation">&gt;</span>
+    <span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>
+  );
+}
+
+<span class="hljs-comment">// note that whenever the setter function is called, the state updates,</span>
+<span class="hljs-comment">// and the App component re-renders to display the new state</span>
+</code></pre>
+<p><code>useState</code> có thể sử dụng một hoặc nhiều lần với single component:</p>
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-keyword">const</span> [language, setLanguage] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>(<span class="hljs-string">&quot;python&quot;</span>);
+  <span class="hljs-keyword">const</span> [yearsExperience, setYearsExperience] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);
+
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>button onClick<span class="hljs-punctuation">=</span>{() <span class="hljs-punctuation">=&gt;</span> <span class="hljs-title function_">setLanguage</span>(<span class="hljs-string">&quot;javascript&quot;</span>)}<span class="hljs-punctuation">&gt;</span>
+        Change language to JS
+      <span class="hljs-punctuation">&lt;/</span>button<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>input
+        <span class="hljs-keyword">type</span><span class="hljs-punctuation">=</span><span class="hljs-string">&quot;number&quot;</span>
+        value<span class="hljs-punctuation">=</span>{yearsExperience}
+        onChange<span class="hljs-punctuation">=</span>{event <span class="hljs-punctuation">=&gt;</span> <span class="hljs-title function_">setYearsExperience</span>(event.<span class="hljs-attr">target</span>.<span class="hljs-attr">value</span>)}
+      <span class="hljs-punctuation">/&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>p<span class="hljs-punctuation">&gt;</span>I am now learning {language}<span class="hljs-punctuation">&lt;/</span>p<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>p<span class="hljs-punctuation">&gt;</span>I have {yearsExperience} years <span class="hljs-keyword">of</span> experience<span class="hljs-punctuation">&lt;/</span>p<span class="hljs-punctuation">&gt;</span>
+    <span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>
+  );
+}
+</code></pre>
+<p><code>useState</code> chấp nhận các value primitive hay object để quản lý state:</p>
+<pre class="hljs"><code><span class="hljs-comment">// we have the option to organize state using whatever is the</span>
+<span class="hljs-comment">// most appropriate data type, according to the data we&#039;re tracking</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-keyword">const</span> [developer, setDeveloper] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>({
+    language<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span>,
+    yearsExperience<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span>
+  });
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleChangeYearsExperience</span>(event) {
+    <span class="hljs-keyword">const</span> years <span class="hljs-punctuation">=</span> event.<span class="hljs-attr">target</span>.<span class="hljs-attr">value</span>;
+    <span class="hljs-comment">// we must pass in the previous state object we had with the spread operator</span>
+    <span class="hljs-title function_">setDeveloper</span>({ ...<span class="hljs-attr">developer</span>, yearsExperience<span class="hljs-punctuation">:</span> years });
+  }
+
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>
+      {<span class="hljs-comment">/* no need to get prev state here; we are replacing the entire object */</span>}
+      <span class="hljs-punctuation">&lt;</span>button
+        onClick<span class="hljs-punctuation">=</span>{() <span class="hljs-punctuation">=&gt;</span>
+          <span class="hljs-title function_">setDeveloper</span>({
+            language<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;javascript&quot;</span>,
+            yearsExperience<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span>
+          })
+        }
+      <span class="hljs-punctuation">&gt;</span>
+        Change language to JS
+      <span class="hljs-punctuation">&lt;/</span>button<span class="hljs-punctuation">&gt;</span>
+      {<span class="hljs-comment">/* we can also pass a reference to the function */</span>}
+      <span class="hljs-punctuation">&lt;</span>input
+        <span class="hljs-keyword">type</span><span class="hljs-punctuation">=</span><span class="hljs-string">&quot;number&quot;</span>
+        value<span class="hljs-punctuation">=</span>{developer.<span class="hljs-attr">yearsExperience</span>}
+        onChange<span class="hljs-punctuation">=</span>{handleChangeYearsExperience}
+      <span class="hljs-punctuation">/&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>p<span class="hljs-punctuation">&gt;</span>I am now learning {developer.<span class="hljs-attr">language</span>}<span class="hljs-punctuation">&lt;/</span>p<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>p<span class="hljs-punctuation">&gt;</span>I have {developer.<span class="hljs-attr">yearsExperience</span>} years <span class="hljs-keyword">of</span> experience<span class="hljs-punctuation">&lt;/</span>p<span class="hljs-punctuation">&gt;</span>
+    <span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>
+  );
+}
+</code></pre>
+<p>Nếu state mới phụ thuộc vào state trước đó, để đảm bảo update đã hoàn tất, chúng ta có thể dùng một function trong setter function đưa ra chính xác state trước đó.</p>
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-keyword">const</span> [developer, setDeveloper] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>({
+    language<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span>,
+    yearsExperience<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span>,
+    isEmployed<span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span>
+  });
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleToggleEmployment</span>(event) {
+    <span class="hljs-comment">// we get the previous state variable&#039;s value in the parameters</span>
+    <span class="hljs-comment">// we can name &#039;prevState&#039; however we like</span>
+    <span class="hljs-title function_">setDeveloper</span>(prevState <span class="hljs-punctuation">=&gt;</span> {
+      <span class="hljs-keyword">return</span> { ...<span class="hljs-attr">prevState</span>, isEmployed<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">!</span>prevState.<span class="hljs-attr">isEmployed</span> };
+      <span class="hljs-comment">// it is essential to return the new state from this function</span>
+    });
+  }
+
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>button onClick<span class="hljs-punctuation">=</span>{handleToggleEmployment}<span class="hljs-punctuation">&gt;</span>Toggle Employment Status<span class="hljs-punctuation">&lt;/</span>button<span class="hljs-punctuation">&gt;</span>
+  );
+}
+</code></pre>
+<hr>
+<h2 id="react-hooks-side-effects-và-useeffect" class="docmd-heading"><a href="#react-hooks-side-effects-và-useeffect" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Side effects và useEffect</h2>
+<p><code>useEffect</code> cho phép thực hiện side effect bên trong các function component. Vậy các side effect là những gì?</p>
+<ul>
+<li>Sử dụng side effects khi chúng ta cần “đụng” đến thế giới bên ngoài. Ví dụ như fetching data từ API hay làm việc với DOM.</li>
+<li>Side effect là các hành động có thể thay đổi component state.</li>
+</ul>
+<p><code>useEffect</code> chấp nhận callback function (hay còn được gọi là ‘effect’ function), được chạy mặc định mỗi lần re-render. Nó chạy một lần khi component mount, cũng là thời điểm phù hợp để thực hiện side effect trong một lifecycle của component.</p>
+<pre class="hljs"><code><span class="hljs-comment">// what does our code do? Picks a color from the colors array</span>
+<span class="hljs-comment">// and makes it the background color</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-keyword">const</span> [colorIndex, setColorIndex] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);
+  <span class="hljs-keyword">const</span> colors <span class="hljs-punctuation">=</span> [<span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>];
+
+  <span class="hljs-comment">// we are performing a &#039;side effect&#039; since we are working with an API</span>
+  <span class="hljs-comment">// we are working with the DOM, a browser API outside of React</span>
+  <span class="hljs-title function_">useEffect</span>(() <span class="hljs-punctuation">=&gt;</span> {
+    document.<span class="hljs-attr">body</span>.<span class="hljs-attr">style</span>.<span class="hljs-attr">backgroundColor</span> <span class="hljs-punctuation">=</span> colors[colorIndex];
+  });
+  <span class="hljs-comment">// whenever state is updated, App re-renders and useEffect runs</span>
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleChangeIndex</span>() {
+    <span class="hljs-keyword">const</span> next <span class="hljs-punctuation">=</span> colorIndex <span class="hljs-punctuation">+</span> <span class="hljs-number">1</span> <span class="hljs-punctuation">===</span> colors.<span class="hljs-attr">length</span> <span class="hljs-punctuation">?</span> <span class="hljs-number">0</span> <span class="hljs-punctuation">:</span> colorIndex <span class="hljs-punctuation">+</span> <span class="hljs-number">1</span>;
+    <span class="hljs-title function_">setColorIndex</span>(next);
+  }
+
+  <span class="hljs-keyword">return</span> <span class="hljs-punctuation">&lt;</span>button onClick<span class="hljs-punctuation">=</span>{handleChangeIndex}<span class="hljs-punctuation">&gt;</span>Change background color<span class="hljs-punctuation">&lt;/</span>button<span class="hljs-punctuation">&gt;</span>;
+}
+</code></pre>
+<p>Để tránh thực hiện callback sau mỗi lần render, chúng ta có thể tạo argument thứ 2 là một array (mảng) trống:</p>
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  ...
+  <span class="hljs-comment">// now our button doesn&#039;t work no matter how many times we click it...</span>
+  <span class="hljs-title function_">useEffect</span>(() <span class="hljs-punctuation">=&gt;</span> {
+    document.<span class="hljs-attr">body</span>.<span class="hljs-attr">style</span>.<span class="hljs-attr">backgroundColor</span> <span class="hljs-punctuation">=</span> colors[colorIndex];
+  }, []);
+  <span class="hljs-comment">// the background color is only set once, upon mount</span>
+
+  <span class="hljs-comment">// how do we not have the effect function run for every state update...</span>
+  <span class="hljs-comment">// but still have it work whenever the button is clicked?</span>
+
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>button onClick<span class="hljs-punctuation">=</span>{handleChangeIndex}<span class="hljs-punctuation">&gt;</span>
+      Change background color
+    <span class="hljs-punctuation">&lt;/</span>button<span class="hljs-punctuation">&gt;</span>
+  );
+}
+</code></pre>
+<p><code>useEffect</code> cho phép chúng ta thực hiện các effect với các mảng dependencies. Mảng dependencies là argument thứ hai, nếu có một trong những giá trị trong mảng thay đổi, thì effect function sẽ chạy lại.</p>
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-keyword">const</span> [colorIndex, setColorIndex] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);
+  <span class="hljs-keyword">const</span> colors <span class="hljs-punctuation">=</span> [<span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>];
+
+  <span class="hljs-comment">// we add colorIndex to our dependencies array</span>
+  <span class="hljs-comment">// when colorIndex changes, useEffect will execute the effect fn again</span>
+  <span class="hljs-title function_">useEffect</span>(() <span class="hljs-punctuation">=&gt;</span> {
+    document.<span class="hljs-attr">body</span>.<span class="hljs-attr">style</span>.<span class="hljs-attr">backgroundColor</span> <span class="hljs-punctuation">=</span> colors[colorIndex];
+    <span class="hljs-comment">// when we use useEffect, we must think about what state values</span>
+    <span class="hljs-comment">// we want our side effect to sync with</span>
+  }, [colorIndex]);
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleChangeIndex</span>() {
+    <span class="hljs-keyword">const</span> next <span class="hljs-punctuation">=</span> colorIndex <span class="hljs-punctuation">+</span> <span class="hljs-number">1</span> <span class="hljs-punctuation">===</span> colors.<span class="hljs-attr">length</span> <span class="hljs-punctuation">?</span> <span class="hljs-number">0</span> <span class="hljs-punctuation">:</span> colorIndex <span class="hljs-punctuation">+</span> <span class="hljs-number">1</span>;
+    <span class="hljs-title function_">setColorIndex</span>(next);
+  }
+
+  <span class="hljs-keyword">return</span> <span class="hljs-punctuation">&lt;</span>button onClick<span class="hljs-punctuation">=</span>{handleChangeIndex}<span class="hljs-punctuation">&gt;</span>Change background color<span class="hljs-punctuation">&lt;/</span>button<span class="hljs-punctuation">&gt;</span>;
+}
+</code></pre>
+<p><code>useEffect</code> cho phép chúng ta unsubscribe những effect nhất định bằng cách trả lại function vào lúc cuối:</p>
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">MouseTracker</span>() {
+  <span class="hljs-keyword">const</span> [mousePosition, setMousePosition] <span class="hljs-punctuation">=</span> <span class="hljs-title function_">useState</span>({ x<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span>, y<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span> });
+
+  React.<span class="hljs-title function_">useEffect</span>(() <span class="hljs-punctuation">=&gt;</span> {
+    <span class="hljs-comment">// .addEventListener() sets up an active listener...</span>
+    window.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&quot;mousemove&quot;</span>, event <span class="hljs-punctuation">=&gt;</span> {
+      <span class="hljs-keyword">const</span> { pageX, pageY } <span class="hljs-punctuation">=</span> event;
+      <span class="hljs-title function_">setMousePosition</span>({ x<span class="hljs-punctuation">:</span> pageX, y<span class="hljs-punctuation">:</span> pageY });
+    });
+
+    <span class="hljs-comment">// ...so when we navigate away from this page, it needs to be</span>
+    <span class="hljs-comment">// removed to stop listening. Otherwise, it will try to set</span>
+    <span class="hljs-comment">// state in a component that doesn&#039;t exist (causing an error)</span>
+
+    <span class="hljs-comment">// We unsubscribe any subscriptions / listeners w/ this &#039;cleanup function&#039;</span>
+    <span class="hljs-keyword">return</span> () <span class="hljs-punctuation">=&gt;</span> {
+      window.<span class="hljs-title function_">removeEventListener</span>(<span class="hljs-string">&quot;mousemove&quot;</span>, event <span class="hljs-punctuation">=&gt;</span> {
+        <span class="hljs-keyword">const</span> { pageX, pageY } <span class="hljs-punctuation">=</span> event;
+        <span class="hljs-title function_">setMousePosition</span>({ x<span class="hljs-punctuation">:</span> pageX, y<span class="hljs-punctuation">:</span> pageY });
+      });
+    };
+  }, []);
+
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>h1<span class="hljs-punctuation">&gt;</span>The current mouse position is<span class="hljs-punctuation">:&lt;/</span>h1<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>p<span class="hljs-punctuation">&gt;</span>
+        X<span class="hljs-punctuation">:</span> {mousePosition.<span class="hljs-attr">x</span>}, Y<span class="hljs-punctuation">:</span> {mousePosition.<span class="hljs-attr">y</span>}
+      <span class="hljs-punctuation">&lt;/</span>p<span class="hljs-punctuation">&gt;</span>
+    <span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>
+  );
+}
+
+<span class="hljs-comment">// Note: we could extract the reused logic in the callbacks to</span>
+<span class="hljs-comment">// their own function, but I believe this is more readable</span>
+</code></pre>
+<p>Fetching data với useEffect:</p>
+<p>Nên chú ý khi xử lý các promise với các cú pháp async/await ngắn gọn yêu cầu phải tạo thêm function riêng biệt (Vì effect callback function không thể async.)</p>
+<pre class="hljs"><code><span class="hljs-keyword">const</span> endpoint <span class="hljs-punctuation">=</span> <span class="hljs-string">&quot;https://api.github.com/users/codeartistryio&quot;</span>;
+
+<span class="hljs-comment">// with promises:</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-keyword">const</span> [user, setUser] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>(<span class="hljs-keyword">null</span>);
+
+  React.<span class="hljs-title function_">useEffect</span>(() <span class="hljs-punctuation">=&gt;</span> {
+    <span class="hljs-comment">// promises work in callback</span>
+    <span class="hljs-title function_">fetch</span>(endpoint)
+      .<span class="hljs-title function_">then</span>(response <span class="hljs-punctuation">=&gt;</span> response.<span class="hljs-title function_">json</span>())
+      .<span class="hljs-title function_">then</span>(data <span class="hljs-punctuation">=&gt;</span> <span class="hljs-title function_">setUser</span>(data));
+  }, []);
+}
+
+<span class="hljs-comment">// with async / await syntax for promise:</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-keyword">const</span> [user, setUser] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>(<span class="hljs-keyword">null</span>);
+  <span class="hljs-comment">// cannot make useEffect callback function async</span>
+  React.<span class="hljs-title function_">useEffect</span>(() <span class="hljs-punctuation">=&gt;</span> {
+    <span class="hljs-title function_">getUser</span>();
+  }, []);
+
+  <span class="hljs-comment">// instead, use async / await in separate function, then call</span>
+  <span class="hljs-comment">// function back in useEffect</span>
+  <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getUser</span>() {
+    <span class="hljs-keyword">const</span> response <span class="hljs-punctuation">=</span> <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&quot;https://api.github.com/codeartistryio&quot;</span>);
+    <span class="hljs-keyword">const</span> data <span class="hljs-punctuation">=</span> <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+    <span class="hljs-title function_">setUser</span>(data);
+  }
+}
+</code></pre>
+<hr>
+<h2 id="react-hooks-performance-và-usecallback" class="docmd-heading"><a href="#react-hooks-performance-và-usecallback" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Performance và useCallback</h2>
+<p><code>useCallback</code> là một hook được sử dụng để cải thiện performance của component.</p>
+<p>Nếu có một component thường xuyên re-render, useCallback sẽ ngăn chặn tình trạng callback functions trong component được tạo lại mỗi lần component re-render (đồng nghĩa với việc function component re-run).</p>
+<p><code>useCallback</code> re-run chỉ khi một trong những dependencies thay đổi.</p>
+<pre class="hljs"><code><span class="hljs-comment">// in Timer, we are calculating the date and putting it in state a lot</span>
+<span class="hljs-comment">// this results in a re-render for every state update</span>
+
+<span class="hljs-comment">// we had a function handleIncrementCount to increment the state &#039;count&#039;...</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">Timer</span>() {
+  <span class="hljs-keyword">const</span> [time, setTime] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>();
+  <span class="hljs-keyword">const</span> [count, setCount] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);
+
+  <span class="hljs-comment">// ... but unless we wrap it in useCallback, the function is</span>
+  <span class="hljs-comment">// recreated for every single re-render (bad performance hit)</span>
+  <span class="hljs-comment">// useCallback hook returns a callback that isn&#039;t recreated every time</span>
+  <span class="hljs-keyword">const</span> inc <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useCallback</span>(
+    <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleIncrementCount</span>() {
+      <span class="hljs-title function_">setCount</span>(prevCount <span class="hljs-punctuation">=&gt;</span> prevCount <span class="hljs-punctuation">+</span> <span class="hljs-number">1</span>);
+    },
+    <span class="hljs-comment">// useCallback accepts a second arg of a dependencies array like useEffect</span>
+    <span class="hljs-comment">// useCallback will only run if any dependency changes (here it&#039;s &#039;setCount&#039;)</span>
+    [setCount]
+  );
+
+  React.<span class="hljs-title function_">useEffect</span>(() <span class="hljs-punctuation">=&gt;</span> {
+    <span class="hljs-keyword">const</span> timeout <span class="hljs-punctuation">=</span> <span class="hljs-title function_">setTimeout</span>(() <span class="hljs-punctuation">=&gt;</span> {
+      <span class="hljs-keyword">const</span> currentTime <span class="hljs-punctuation">=</span> JSON.<span class="hljs-title function_">stringify</span>(<span class="hljs-keyword">new</span> <span class="hljs-title function_">Date</span>(Date.<span class="hljs-title function_">now</span>()));
+      <span class="hljs-title function_">setTime</span>(currentTime);
+    }, <span class="hljs-number">300</span>);
+
+    <span class="hljs-keyword">return</span> () <span class="hljs-punctuation">=&gt;</span> {
+      <span class="hljs-title function_">clearTimeout</span>(timeout);
+    };
+  }, [time]);
+
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>p<span class="hljs-punctuation">&gt;</span>The current time is<span class="hljs-punctuation">:</span> {time}<span class="hljs-punctuation">&lt;/</span>p<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>p<span class="hljs-punctuation">&gt;</span>Count<span class="hljs-punctuation">:</span> {count}<span class="hljs-punctuation">&lt;/</span>p<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>button onClick<span class="hljs-punctuation">=</span>{inc}<span class="hljs-punctuation">&gt;+&lt;/</span>button<span class="hljs-punctuation">&gt;</span>
+    <span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>
+  );
+}
+</code></pre>
+<hr>
+<h2 id="react-hooks-memorization-và-usememo" class="docmd-heading"><a href="#react-hooks-memorization-và-usememo" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Memorization và useMemo</h2>
+<p><code>useMemo</code> khá tương tự với useCallback và để cải thiện hiệu năng. Thay vì dùng để callback, nó được dùng để lưu lại kết quả của hàm nào và những giá trị nào sẽ làm thay đổi kết quả đó.</p>
+<pre class="hljs"><code><span class="hljs-comment">// useMemo is useful when we need a lot of computing resources</span>
+<span class="hljs-comment">// to perform an operation, but don&#039;t want to repeat it on each re-render</span>
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-comment">// state to select a word in &#039;words&#039; array below</span>
+  <span class="hljs-keyword">const</span> [wordIndex, setWordIndex] <span class="hljs-punctuation">=</span> <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);
+  <span class="hljs-comment">// state for counter</span>
+  <span class="hljs-keyword">const</span> [count, setCount] <span class="hljs-punctuation">=</span> <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);
+
+  <span class="hljs-comment">// words we&#039;ll use to calculate letter count</span>
+  <span class="hljs-keyword">const</span> words <span class="hljs-punctuation">=</span> [<span class="hljs-string">&quot;i&quot;</span>, <span class="hljs-string">&quot;am&quot;</span>, <span class="hljs-string">&quot;learning&quot;</span>, <span class="hljs-string">&quot;react&quot;</span>];
+  <span class="hljs-keyword">const</span> word <span class="hljs-punctuation">=</span> words[wordIndex];
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">getLetterCount</span>(word) {
+    <span class="hljs-comment">// we mimic expensive calculation with a very long (unnecessary) loop</span>
+    <span class="hljs-keyword">let</span> i <span class="hljs-punctuation">=</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (i <span class="hljs-punctuation">&lt;</span> <span class="hljs-number">1000000</span>) i<span class="hljs-punctuation">++</span>;
+    <span class="hljs-keyword">return</span> word.<span class="hljs-attr">length</span>;
+  }
+
+  <span class="hljs-comment">// Memoize expensive function to return previous value if input was the same</span>
+  <span class="hljs-comment">// only perform calculation if new word without a cached value</span>
+  <span class="hljs-keyword">const</span> letterCount <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useMemo</span>(() <span class="hljs-punctuation">=&gt;</span> <span class="hljs-title function_">getLetterCount</span>(word), [word]);
+
+  <span class="hljs-comment">// if calculation was done without useMemo, like so:</span>
+
+  <span class="hljs-comment">// const letterCount = getLetterCount(word);</span>
+
+  <span class="hljs-comment">// there would be a delay in updating the counter</span>
+  <span class="hljs-comment">// we would have to wait for the expensive function to finish</span>
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleChangeIndex</span>() {
+    <span class="hljs-comment">// flip from one word in the array to the next</span>
+    <span class="hljs-keyword">const</span> next <span class="hljs-punctuation">=</span> wordIndex <span class="hljs-punctuation">+</span> <span class="hljs-number">1</span> <span class="hljs-punctuation">===</span> words.<span class="hljs-attr">length</span> <span class="hljs-punctuation">?</span> <span class="hljs-number">0</span> <span class="hljs-punctuation">:</span> wordIndex <span class="hljs-punctuation">+</span> <span class="hljs-number">1</span>;
+    <span class="hljs-title function_">setWordIndex</span>(next);
+  }
+
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>p<span class="hljs-punctuation">&gt;</span>
+        {word} has {letterCount} letters
+      <span class="hljs-punctuation">&lt;/</span>p<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>button onClick<span class="hljs-punctuation">=</span>{handleChangeIndex}<span class="hljs-punctuation">&gt;</span>Next word<span class="hljs-punctuation">&lt;/</span>button<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>p<span class="hljs-punctuation">&gt;</span>Counter<span class="hljs-punctuation">:</span> {count}<span class="hljs-punctuation">&lt;/</span>p<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>button onClick<span class="hljs-punctuation">=</span>{() <span class="hljs-punctuation">=&gt;</span> <span class="hljs-title function_">setCount</span>(count <span class="hljs-punctuation">+</span> <span class="hljs-number">1</span>)}<span class="hljs-punctuation">&gt;+&lt;/</span>button<span class="hljs-punctuation">&gt;</span>
+    <span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>
+  );
+}
+</code></pre>
+<hr>
+<h2 id="react-hooks-refs-và-useref" class="docmd-heading"><a href="#react-hooks-refs-và-useref" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Refs và useRef</h2>
+<p>Ref là attribute đặc biệt và luôn có sẵn trên tất cả React components. Chúng cho phép chúng ta tạo ra reference đến element/component có sẵn khi mount component.</p>
+<p><code>useRef</code> cho phép chúng ta sử dụng React Refs một cách dễ dàng. Chúng ta gọi useRef (ở top của component đó) và đính kèm giá trị trả về vào attribute ref của element đó để tham chiếu.</p>
+<p>Khi đã tạo reference, chúng ta sử dụng property hiện có để chỉnh sửa (modify-mutate) các properties của element đó. Hoặc chúng ta có thể call bất kỳ methods nào trên element đó (như <code>.focus()</code> để focus một input).</p>
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-keyword">const</span> [query, setQuery] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>(<span class="hljs-string">&quot;react hooks&quot;</span>);
+  <span class="hljs-comment">// we can pass useRef a default value</span>
+  <span class="hljs-comment">// we don&#039;t need it here, so we pass in null to ref an empty object</span>
+  <span class="hljs-keyword">const</span> searchInput <span class="hljs-punctuation">=</span> <span class="hljs-title function_">useRef</span>(<span class="hljs-keyword">null</span>);
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleClearSearch</span>() {
+    <span class="hljs-comment">// current references the text input once App mounts</span>
+    searchInput.<span class="hljs-attr">current</span>.<span class="hljs-attr">value</span> <span class="hljs-punctuation">=</span> <span class="hljs-string">&quot;&quot;</span>;
+    <span class="hljs-comment">// useRef can store basically any value in its .current property</span>
+    searchInput.<span class="hljs-attr">current</span>.<span class="hljs-title function_">focus</span>();
+  }
+
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>form<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>input
+        <span class="hljs-keyword">type</span><span class="hljs-punctuation">=</span><span class="hljs-string">&quot;text&quot;</span>
+        onChange<span class="hljs-punctuation">=</span>{event <span class="hljs-punctuation">=&gt;</span> <span class="hljs-title function_">setQuery</span>(event.<span class="hljs-attr">target</span>.<span class="hljs-attr">value</span>)}
+        ref<span class="hljs-punctuation">=</span>{searchInput}
+      <span class="hljs-punctuation">/&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>button <span class="hljs-keyword">type</span><span class="hljs-punctuation">=</span><span class="hljs-string">&quot;submit&quot;</span><span class="hljs-punctuation">&gt;</span>Search<span class="hljs-punctuation">&lt;/</span>button<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>button <span class="hljs-keyword">type</span><span class="hljs-punctuation">=</span><span class="hljs-string">&quot;button&quot;</span> onClick<span class="hljs-punctuation">=</span>{handleClearSearch}<span class="hljs-punctuation">&gt;</span>
+        Clear
+      <span class="hljs-punctuation">&lt;/</span>button<span class="hljs-punctuation">&gt;</span>
+    <span class="hljs-punctuation">&lt;/</span>form<span class="hljs-punctuation">&gt;</span>
+  );
+}
+</code></pre>
+<hr>
+<h1 id="hooks-nâng-cao">Hooks nâng cao</h1>
+<h2 id="hooks-nâng-cao-context-và-usecontext" class="docmd-heading"><a href="#hooks-nâng-cao-context-và-usecontext" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Context và useContext</h2>
+<p>Trong React, chúng ta nên tránh tạo ra các multiple props để chuyển data xuống 2 hay nhiều level từ một parent component:</p>
+<pre class="hljs"><code><span class="hljs-comment">// Context helps us avoid creating multiple duplicate props</span>
+<span class="hljs-comment">// This pattern is also called props drilling:</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-comment">// we want to pass user data down to Header</span>
+  <span class="hljs-keyword">const</span> [user] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>({ name<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Fred&quot;</span> });
+
+  <span class="hljs-keyword">return</span> (
+   {<span class="hljs-comment">/* first &#039;user&#039; prop */</span>}
+    <span class="hljs-punctuation">&lt;</span>Main user<span class="hljs-punctuation">=</span>{user} <span class="hljs-punctuation">/&gt;</span>
+  );
+}
+
+<span class="hljs-keyword">const</span> Main <span class="hljs-punctuation">=</span> ({ user }) <span class="hljs-punctuation">=&gt;</span> (
+  <span class="hljs-punctuation">&lt;&gt;</span>
+    {<span class="hljs-comment">/* second &#039;user&#039; prop */</span>}
+    <span class="hljs-punctuation">&lt;</span>Header user<span class="hljs-punctuation">=</span>{user} <span class="hljs-punctuation">/&gt;</span>
+    <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>Main app content...<span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>
+  <span class="hljs-punctuation">&lt;/&gt;</span>
+);
+
+<span class="hljs-keyword">const</span> Header <span class="hljs-punctuation">=</span> ({ user }) <span class="hljs-punctuation">=&gt;</span> <span class="hljs-punctuation">&lt;</span>header<span class="hljs-punctuation">&gt;</span>Welcome, {user.<span class="hljs-attr">name</span>}<span class="hljs-punctuation">!&lt;/</span>header<span class="hljs-punctuation">&gt;</span>;
+</code></pre>
+<p>Context khá hữu ích dùng để chuyển props xuống các tầng levels của child:</p>
+<pre class="hljs"><code><span class="hljs-comment">// Here is the previous example rewritten with Context</span>
+<span class="hljs-comment">// First we create context, where we can pass in default values</span>
+<span class="hljs-keyword">const</span> UserContext <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">createContext</span>();
+<span class="hljs-comment">// we call this &#039;UserContext&#039; because that&#039;s what data we&#039;re passing down</span>
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-comment">// we want to pass user data down to Header</span>
+  <span class="hljs-keyword">const</span> [user] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>({ name<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Fred&quot;</span> });
+
+  <span class="hljs-keyword">return</span> (
+    {<span class="hljs-comment">/* we wrap the parent component with the provider property */</span>}
+    {<span class="hljs-comment">/* we pass data down the computer tree w/ value prop */</span>}
+    <span class="hljs-punctuation">&lt;</span>UserContext.<span class="hljs-attr">Provider</span> value<span class="hljs-punctuation">=</span>{user}<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>Main <span class="hljs-punctuation">/&gt;</span>
+    <span class="hljs-punctuation">&lt;/</span>UserContext.<span class="hljs-attr">Provider</span><span class="hljs-punctuation">&gt;</span>
+  );
+}
+
+<span class="hljs-keyword">const</span> Main <span class="hljs-punctuation">=</span> () <span class="hljs-punctuation">=&gt;</span> (
+  <span class="hljs-punctuation">&lt;&gt;</span>
+    <span class="hljs-punctuation">&lt;</span>Header <span class="hljs-punctuation">/&gt;</span>
+    <span class="hljs-punctuation">&lt;</span>div<span class="hljs-punctuation">&gt;</span>Main app content...<span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>
+  <span class="hljs-punctuation">&lt;/&gt;</span>
+);
+
+<span class="hljs-comment">// we can remove the two &#039;user&#039; props, we can just use consumer</span>
+<span class="hljs-comment">// to consume the data where we need it</span>
+<span class="hljs-keyword">const</span> Header <span class="hljs-punctuation">=</span> () <span class="hljs-punctuation">=&gt;</span> (
+  {<span class="hljs-comment">/* we use this pattern called render props to get access to the data*/</span>}
+  <span class="hljs-punctuation">&lt;</span>UserContext.<span class="hljs-attr">Consumer</span><span class="hljs-punctuation">&gt;</span>
+    {user <span class="hljs-punctuation">=&gt;</span> <span class="hljs-punctuation">&lt;</span>header<span class="hljs-punctuation">&gt;</span>Welcome, {user.<span class="hljs-attr">name</span>}<span class="hljs-punctuation">!&lt;/</span>header<span class="hljs-punctuation">&gt;</span>}
+  <span class="hljs-punctuation">&lt;/</span>UserContext.<span class="hljs-attr">Consumer</span><span class="hljs-punctuation">&gt;</span>
+);
+</code></pre>
+<p><code>useContext</code> hook có thể xóa render props pattern này, tuy nhiên, để có thể consume context trong bất kỳ function component nào:</p>
+<pre class="hljs"><code><span class="hljs-keyword">const</span> Header <span class="hljs-punctuation">=</span> () <span class="hljs-punctuation">=&gt;</span> {
+  <span class="hljs-comment">// we pass in the entire context object to consume it</span>
+  <span class="hljs-keyword">const</span> user <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useContext</span>(UserContext);
+  <span class="hljs-comment">// and we can remove the Consumer tags</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-punctuation">&lt;</span>header<span class="hljs-punctuation">&gt;</span>Welcome, {user.<span class="hljs-attr">name</span>}<span class="hljs-punctuation">!&lt;/</span>header<span class="hljs-punctuation">&gt;</span>;
+};
+</code></pre>
+<hr>
+<h2 id="hooks-nâng-cao-reducers-và-usereducer" class="docmd-heading"><a href="#hooks-nâng-cao-reducers-và-usereducer" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Reducers và useReducer</h2>
+<p>Reducer là function khá đơn giản, được dùng để lấy state object trước đó và một action object và trả về một state object mới. Ví dụ:</p>
+<pre class="hljs"><code><span class="hljs-comment">// let&#039;s say this reducer manages user state in our app:</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">reducer</span>(state, action) {
+  <span class="hljs-comment">// reducers often use a switch statement to update state</span>
+  <span class="hljs-comment">// in one way or another based on the action&#039;s type property</span>
+  <span class="hljs-keyword">switch</span> (action.<span class="hljs-keyword">type</span>) {
+    <span class="hljs-comment">// if action.type has the string &#039;LOGIN&#039; on it</span>
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;LOGIN&quot;</span><span class="hljs-punctuation">:</span>
+      <span class="hljs-comment">// we get data from the payload object on action</span>
+      <span class="hljs-keyword">return</span> { username<span class="hljs-punctuation">:</span> action.<span class="hljs-attr">payload</span>.<span class="hljs-attr">username</span>, isAuth<span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span> };
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;SIGNOUT&quot;</span><span class="hljs-punctuation">:</span>
+      <span class="hljs-keyword">return</span> { username<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span>, isAuth<span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span> };
+    <span class="hljs-keyword">default</span><span class="hljs-punctuation">:</span>
+      <span class="hljs-comment">// if no case matches, return previous state</span>
+      <span class="hljs-keyword">return</span> state;
+  }
+}
+</code></pre>
+<p>React <code>useReducer</code> hook là một cách hữu ích để quản lý state trong React bên cạnh useState, và nó có thể kết hợp với context dùng để quản lý state trong một ứng dụng mà có thể không cần sử dụng đến redux. Ngoài ra, sự kết hợp useReducer và useContext có thể là hệ thống quản lý state cho apps.</p>
+<pre class="hljs"><code><span class="hljs-keyword">const</span> initialState <span class="hljs-punctuation">=</span> { username<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span>, isAuth<span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span> };
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">reducer</span>(state, action) {
+  <span class="hljs-keyword">switch</span> (action.<span class="hljs-keyword">type</span>) {
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;LOGIN&quot;</span><span class="hljs-punctuation">:</span>
+      <span class="hljs-keyword">return</span> { username<span class="hljs-punctuation">:</span> action.<span class="hljs-attr">payload</span>.<span class="hljs-attr">username</span>, isAuth<span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span> };
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;SIGNOUT&quot;</span><span class="hljs-punctuation">:</span>
+      <span class="hljs-comment">// could also spread in initialState here</span>
+      <span class="hljs-keyword">return</span> { username<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span>, isAuth<span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span> };
+    <span class="hljs-keyword">default</span><span class="hljs-punctuation">:</span>
+      <span class="hljs-keyword">return</span> state;
+  }
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-comment">// useReducer requires a reducer function to use and an initialState</span>
+  <span class="hljs-keyword">const</span> [state, dispatch] <span class="hljs-punctuation">=</span> <span class="hljs-title function_">useReducer</span>(reducer, initialState);
+  <span class="hljs-comment">// we get the current result of the reducer on &#039;state&#039;</span>
+
+  <span class="hljs-comment">// we use dispatch to &#039;dispatch&#039; actions, to run our reducer</span>
+  <span class="hljs-comment">// with the data it needs (the action object)</span>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleLogin</span>() {
+    <span class="hljs-title function_">dispatch</span>({ <span class="hljs-keyword">type</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;LOGIN&quot;</span>, payload<span class="hljs-punctuation">:</span> { username<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Ted&quot;</span> } });
+  }
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleSignout</span>() {
+    <span class="hljs-title function_">dispatch</span>({ <span class="hljs-keyword">type</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;SIGNOUT&quot;</span> });
+  }
+
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;&gt;</span>
+      Current user<span class="hljs-punctuation">:</span> {state.<span class="hljs-attr">username</span>}, isAuthenticated<span class="hljs-punctuation">:</span> {state.<span class="hljs-attr">isAuth</span>}
+      <span class="hljs-punctuation">&lt;</span>button onClick<span class="hljs-punctuation">=</span>{handleLogin}<span class="hljs-punctuation">&gt;</span>Login<span class="hljs-punctuation">&lt;/</span>button<span class="hljs-punctuation">&gt;</span>
+      <span class="hljs-punctuation">&lt;</span>button onClick<span class="hljs-punctuation">=</span>{handleSignout}<span class="hljs-punctuation">&gt;</span>Signout<span class="hljs-punctuation">&lt;/</span>button<span class="hljs-punctuation">&gt;</span>
+    <span class="hljs-punctuation">&lt;/&gt;</span>
+  );
+}
+</code></pre>
+<hr>
+<h2 id="hooks-nâng-cao-các-hooks-custom" class="docmd-heading"><a href="#hooks-nâng-cao-các-hooks-custom" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Các hooks custom</h2>
+<p>Các hooks được tạo ra nhằm tái sử dụng behavior dễ dàng giữa các component. Chúng là pattern dễ hiểu hơn các loại khác của class components, như higher-order component hay render props. Chúng ta có thể tự tạo ra hook của riêng mình tùy thuộc vào nhu cầu từng dự án, bên cạnh những gì React đã có sẵn:</p>
+<pre class="hljs"><code><span class="hljs-comment">// here&#039;s a custom hook that is used to fetch data from an API</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">useAPI</span>(endpoint) {
+  <span class="hljs-keyword">const</span> [value, setValue] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>([]);
+
+  React.<span class="hljs-title function_">useEffect</span>(() <span class="hljs-punctuation">=&gt;</span> {
+    <span class="hljs-title function_">getData</span>();
+  }, []);
+
+  <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getData</span>() {
+    <span class="hljs-keyword">const</span> response <span class="hljs-punctuation">=</span> <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(endpoint);
+    <span class="hljs-keyword">const</span> data <span class="hljs-punctuation">=</span> <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+    <span class="hljs-title function_">setValue</span>(data);
+  };
+
+  <span class="hljs-keyword">return</span> value;
+};
+
+<span class="hljs-comment">// this is a working example! try it yourself (i.e. in codesandbox.io)</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-keyword">const</span> todos <span class="hljs-punctuation">=</span> <span class="hljs-title function_">useAPI</span>(<span class="hljs-string">&quot;https://todos-dsequjaojf.now.sh/todos&quot;</span>);
+
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-punctuation">&lt;</span>ul<span class="hljs-punctuation">&gt;</span>
+      {todos.<span class="hljs-title function_">map</span>(todo <span class="hljs-punctuation">=&gt;</span> <span class="hljs-punctuation">&lt;</span>li key<span class="hljs-punctuation">=</span>{todo.<span class="hljs-keyword">id</span>}<span class="hljs-punctuation">&gt;</span>{todo.<span class="hljs-attr">text</span>}<span class="hljs-punctuation">&lt;/</span>li<span class="hljs-punctuation">&gt;</span>}
+    <span class="hljs-punctuation">&lt;/</span>ul<span class="hljs-punctuation">&gt;</span>
+  );
+}
+</code></pre>
+<hr>
+<h2 id="hooks-nâng-cao-các-quy-tắc-của-hooks" class="docmd-heading"><a href="#hooks-nâng-cao-các-quy-tắc-của-hooks" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Các quy tắc của hooks</h2>
+<p>Khi sử dụng React hooks thì có 2 nguyên tắc không nên vi phạm:</p>
+<ol>
+<li>Hooks chỉ có thể được call trên top của components (chúng không thể ở trong conditionals, loops hay nested functions).</li>
+<li>Hooks chỉ có thể sử dụng trong function components (chúng không thể dùng trong Javascript function bình thường hay class components).</li>
+</ol>
+<pre class="hljs"><code><span class="hljs-keyword">function</span> <span class="hljs-title function_">checkAuth</span>() {
+  <span class="hljs-comment">// Rule 2 Violated! Hooks cannot be used in normal functions, only components</span>
+  React.<span class="hljs-title function_">useEffect</span>(() <span class="hljs-punctuation">=&gt;</span> {
+    <span class="hljs-title function_">getUser</span>();
+  }, []);
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>() {
+  <span class="hljs-comment">// this is the only validly executed hook in this component</span>
+  <span class="hljs-keyword">const</span> [user, setUser] <span class="hljs-punctuation">=</span> React.<span class="hljs-title function_">useState</span>(<span class="hljs-keyword">null</span>);
+
+  <span class="hljs-comment">// Rule 1 violated! Hooks cannot be used within conditionals (or loops)</span>
+  <span class="hljs-keyword">if</span> (<span class="hljs-punctuation">!</span>user) {
+    React.<span class="hljs-title function_">useEffect</span>(() <span class="hljs-punctuation">=&gt;</span> {
+      <span class="hljs-title function_">setUser</span>({ isAuth<span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span> });
+      <span class="hljs-comment">// if you want to conditionally execute an effect, use the</span>
+      <span class="hljs-comment">// dependencies array for useEffect</span>
+    }, []);
+  }
+
+  <span class="hljs-title function_">checkAuth</span>();
+
+  <span class="hljs-comment">// Rule 1 violated! Hooks cannot be used in nested functions</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-punctuation">&lt;</span>div onClick<span class="hljs-punctuation">=</span>{() <span class="hljs-punctuation">=&gt;</span> React.<span class="hljs-title function_">useMemo</span>(() <span class="hljs-punctuation">=&gt;</span> <span class="hljs-title function_">doStuff</span>(), [])}<span class="hljs-punctuation">&gt;</span>Our app<span class="hljs-punctuation">&lt;/</span>div<span class="hljs-punctuation">&gt;</span>;
+}
+</code></pre>
+
+                
+                  <div class="page-navigation">
+                    
+                      <div class="prev-page-placeholder">
+                      </div>
+                    
+                    
+                      <a href="../" class="next-page">
+                        <span><small>next</small>
+                          <strong>
+                            Introduction
+                          </strong></span>
+                        
+<svg class="lucide-icon icon-arrow-right page-nav-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-arrow-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" />
+</svg>
+
+                      </a>
+                    
+                  </div>
+                
+              </div>
+              <div class="toc-sidebar">
+                
+
+
+  <div class="toc-container">
+    <h2 class="toc-title">onThisPage<span class="mobile-view toc-menu-button float-right">
+<svg class="lucide-icon icon-chevron-down " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-down"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m6 9 6 6 6-6" />
+</svg>
+</span></h2>
+    <ul class="toc-list">
+      
+        <li class="toc-item toc-level-2">
+          <a href="#core-concepts-các-element-và-jsx" class="toc-link">Các element và JSX</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#core-concepts-component-và-prop-của-react" class="toc-link">Component và Prop của React</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#core-concepts-list-và-key" class="toc-link">List và key</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#core-concepts-events-và-event-handlers" class="toc-link">Events và Event Handlers</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#react-hooks-state-và-usestate" class="toc-link">State và useState</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#react-hooks-side-effects-và-useeffect" class="toc-link">Side effects và useEffect</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#react-hooks-performance-và-usecallback" class="toc-link">Performance và useCallback</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#react-hooks-memorization-và-usememo" class="toc-link">Memorization và useMemo</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#react-hooks-refs-và-useref" class="toc-link">Refs và useRef</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#hooks-nâng-cao-context-và-usecontext" class="toc-link">Context và useContext</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#hooks-nâng-cao-reducers-và-usereducer" class="toc-link">Reducers và useReducer</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#hooks-nâng-cao-các-hooks-custom" class="toc-link">Các hooks custom</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#hooks-nâng-cao-các-quy-tắc-của-hooks" class="toc-link">Các quy tắc của hooks</a>
+        </li>
+      
+    </ul>
+  </div>
+
+              </div>
+            </div>
+            <div class="page-footer-actions">
+              
+              
+              <span class="git-spacer"></span>
+              
+            </div>
+          </main>
+          
+
+
+<footer class="page-footer">
+  <div class="footer-content">
+    <div class="user-footer">© 2026 MinhCreatorVN.</div>
+    
+      <div class="branding-footer">
+        builtWith <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg> <a href="https://docmd.io" target="_blank" rel="noopener">docmd.</a>
+      </div>
+    
+  </div>
+</footer>
+
+        </div>
+      </div>
+      
+      <script src="../assets/js/docmd-main.js?v=mprs2l3l"></script>
+      
+      <script src="../assets/js/docmd-git.js?v=mprs2l3l"></script>
+      <script src="../assets/js/docmd-image-lightbox.js?v=mprs2l3l" ></script>
+<script src="https://cdn.jsdelivr.net/npm/minisearch@7.2.0/dist/umd/index.min.js" ></script>
+<script src="../assets/js/docmd-search.js?v=mprs2l3l" ></script>
+<script src="../assets/js/init-mermaid.js?v=mprs2l3l" type="module"></script>
+<script src="../assets/js/docmd-git.js?v=mprs2l3l" type="module"></script>
+
+  <!-- Search Modal (Injected by @docmd/plugin-search) -->
+  <div id="docmd-search-modal" class="docmd-search-modal" style="display: none;"
+       data-search-placeholder="Search documentation..."
+       data-search-no-results="No results found."
+       data-search-error="Failed to load search index."
+       data-search-initial="Type to start searching..."
+       data-search-navigate="to navigate"
+       data-search-escape="to close">
+      <div class="docmd-search-box">
+          <div class="docmd-search-header">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon icon-search"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+              <input type="text" id="docmd-search-input" placeholder="Search documentation..." autocomplete="off" spellcheck="false">
+              <button onclick="window.closeDocmdSearch()" class="docmd-search-close" aria-label="Close search">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon icon-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+              </button>
+          </div>
+          <div id="docmd-search-results" class="docmd-search-results"></div>
+          <div class="docmd-search-footer">
+              <span><kbd class="docmd-kbd">↑</kbd> <kbd class="docmd-kbd">↓</kbd> to navigate</span>
+              <span><kbd class="docmd-kbd">ESC</kbd> to close</span>
+          </div>
+      </div>
+  </div>
+
+    <script>
+      (function() {
+        var searchDebounceTimer;
+
+        document.addEventListener('click', function(e) {
+          var link = e.target.closest('a');
+          if (!link || !window.gtag) return;
+          
+          var url = link.href;
+          var hostname = window.location.hostname;
+          var isExternal = link.hostname && link.hostname !== hostname;
+          var isDownload = link.hasAttribute('download') || url.match(/\.(pdf|zip|tar|gz|exe|pkg)$/i);
+          
+          if (isExternal) {
+            gtag('event', 'click_external', { 'url': url, 'link_text': link.innerText.trim() });
+          } else if (isDownload) {
+            gtag('event', 'download', { 'file_name': url.split('/').pop(), 'url': url });
+          }
+
+          // TOC tracking
+          if (link.classList.contains('toc-link')) {
+            gtag('event', 'toc_click', { 'target_id': link.getAttribute('href'), 'title': link.innerText.trim() });
+          }
+
+          // Permalink tracking
+          if (link.classList.contains('heading-anchor')) {
+            gtag('event', 'permalink_click', { 'url': url });
+          }
+        });
+
+        
+        // Search Keyword Tracking
+        document.addEventListener('input', function(e) {
+          if (e.target.id === 'docmd-search-input' && window.gtag) {
+            var query = e.target.value.trim();
+            if (query.length < 3) return;
+            
+            clearTimeout(searchDebounceTimer);
+            searchDebounceTimer = setTimeout(function() {
+              gtag('event', 'search', { 'search_term': query });
+            }, 1000);
+          }
+        });
+        
+      })();
+    </script>
+
+<script>window.__git_config={"repo":null,"branch":"main","editLink":false,"lastUpdated":true,"commitHistory":true,"maxCommits":5,"dateFormat":"relative"};window.__git_i18n={"lastUpdated":"Last updated","recentCommits":"Recent commits","viewCommitHistory":"View commit history","editOnGitHub":"Edit on GitHub","editOnGitLab":"Edit on GitLab","editOnBitbucket":"Edit on Bitbucket","editThisPage":"Edit this page","justNow":"just now","minutesAgo":"{n}m ago","hoursAgo":"{n}h ago","daysAgo":"{n}d ago"}</script>
+      
+  </body>
+</html>

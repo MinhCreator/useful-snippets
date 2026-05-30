@@ -1,0 +1,19 @@
+// {
+    //   "title": "Getting Started",
+    //   "icon": "rocket",
+    //   "collapsible": true,
+    //   "children": [
+    //     {
+    //       "title": "Installation",
+    //       "path": "https://docs.docmd.io/getting-started/installation",
+    //       "icon": "download",
+    //       "external": true
+    //     },
+    //     {
+    //       "title": "Configuration",
+    //       "path": "https://docs.docmd.io/configuration/overview",
+    //       "icon": "cog",
+    //       "external": true
+    //     }
+    //   ]
+    // },

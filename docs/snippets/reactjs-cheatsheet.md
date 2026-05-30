@@ -166,7 +166,7 @@ const username = "John";
 // we add custom 'attributes' called props
 ReactDOM.render(
   <Header username={username} />,
-  document.getElementById("root")
+  document.getElementById("root"),
 );
 // we called this prop 'username', but can use any valid JS identifier
 
@@ -283,7 +283,7 @@ Dùng `.map()` để chuyển mảng list of data vào list of elements:
 
 ```jsx
 const people = ["John", "Bob", "Fred"];
-const peopleList = people.map(person => <p>{person}</p>);
+const peopleList = people.map((person) => <p>{person}</p>);
 ```
 
 `.map()` cũng được dùng cho components như là elements:
@@ -310,12 +310,14 @@ Mỗi React element được lặp lại cần một `key` props. Keys là nhân
 
 ```jsx
 function App() {
-  const people = ['John', 'Bob', 'Fred'];
+  const people = ["John", "Bob", "Fred"];
 
   return (
     <ul>
       {/* keys need to be primitive values, ideally a generated id */}
-      {people.map(person => <Person key={person} name={person} />)}
+      {people.map((person) => (
+        <Person key={person} name={person} />
+      ))}
     </ul>
   );
 }
@@ -323,12 +325,14 @@ function App() {
 // If you don't have ids with your set of data or unique primitive values,
 // you can use the second parameter of .map() to get each elements index
 function App() {
-  const people = ['John', 'Bob', 'Fred'];
+  const people = ["John", "Bob", "Fred"];
 
   return (
     <ul>
       {/* use array element index for key */}
-      {people.map((person, i) => <Person key={i} name={person} />)}
+      {people.map((person, i) => (
+        <Person key={i} name={person} />
+      ))}
     </ul>
   );
 }
@@ -395,12 +399,12 @@ function App() {
 `useState` cho phép chúng ta khai báo local state trong Function Component:
 
 ```jsx
-import React from 'react';
+import React from "react";
 
 // create state variable
 // syntax: const [stateVariable] = React.useState(defaultValue);
 function App() {
-  const [language] = React.useState('javascript');
+  const [language] = React.useState("javascript");
   // we use array destructuring to declare state variable
 
   return <div>I am learning {language}</div>;
@@ -458,7 +462,7 @@ function App() {
       <input
         type="number"
         value={yearsExperience}
-        onChange={event => setYearsExperience(event.target.value)}
+        onChange={(event) => setYearsExperience(event.target.value)}
       />
       <p>I am now learning {language}</p>
       <p>I have {yearsExperience} years of experience</p>
@@ -475,7 +479,7 @@ function App() {
 function App() {
   const [developer, setDeveloper] = React.useState({
     language: "",
-    yearsExperience: 0
+    yearsExperience: 0,
   });
 
   function handleChangeYearsExperience(event) {
@@ -491,7 +495,7 @@ function App() {
         onClick={() =>
           setDeveloper({
             language: "javascript",
-            yearsExperience: 0
+            yearsExperience: 0,
           })
         }
       >
@@ -517,13 +521,13 @@ function App() {
   const [developer, setDeveloper] = React.useState({
     language: "",
     yearsExperience: 0,
-    isEmployed: false
+    isEmployed: false,
   });
 
   function handleToggleEmployment(event) {
     // we get the previous state variable's value in the parameters
     // we can name 'prevState' however we like
-    setDeveloper(prevState => {
+    setDeveloper((prevState) => {
       return { ...prevState, isEmployed: !prevState.isEmployed };
       // it is essential to return the new state from this function
     });
@@ -623,7 +627,7 @@ function MouseTracker() {
 
   React.useEffect(() => {
     // .addEventListener() sets up an active listener...
-    window.addEventListener("mousemove", event => {
+    window.addEventListener("mousemove", (event) => {
       const { pageX, pageY } = event;
       setMousePosition({ x: pageX, y: pageY });
     });
@@ -634,7 +638,7 @@ function MouseTracker() {
 
     // We unsubscribe any subscriptions / listeners w/ this 'cleanup function'
     return () => {
-      window.removeEventListener("mousemove", event => {
+      window.removeEventListener("mousemove", (event) => {
         const { pageX, pageY } = event;
         setMousePosition({ x: pageX, y: pageY });
       });
@@ -669,8 +673,8 @@ function App() {
   React.useEffect(() => {
     // promises work in callback
     fetch(endpoint)
-      .then(response => response.json())
-      .then(data => setUser(data));
+      .then((response) => response.json())
+      .then((data) => setUser(data));
   }, []);
 }
 
@@ -716,11 +720,11 @@ function Timer() {
   // useCallback hook returns a callback that isn't recreated every time
   const inc = React.useCallback(
     function handleIncrementCount() {
-      setCount(prevCount => prevCount + 1);
+      setCount((prevCount) => prevCount + 1);
     },
     // useCallback accepts a second arg of a dependencies array like useEffect
     // useCallback will only run if any dependency changes (here it's 'setCount')
-    [setCount]
+    [setCount],
   );
 
   React.useEffect(() => {
@@ -829,7 +833,7 @@ function App() {
     <form>
       <input
         type="text"
-        onChange={event => setQuery(event.target.value)}
+        onChange={(event) => setQuery(event.target.value)}
         ref={searchInput}
       />
       <button type="submit">Search</button>

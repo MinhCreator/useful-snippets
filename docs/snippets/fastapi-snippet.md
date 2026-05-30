@@ -1380,4 +1380,4 @@ else:
 
 ---
 
-*These patterns target FastAPI with Pydantic v2, async SQLAlchemy 2.0, and JWT auth. The key architecture: **routers** are thin (HTTP only), **services** contain business logic, **repositories** handle data access, and **dependencies** wire everything together with `Depends()`.*
+_These patterns target FastAPI with Pydantic v2, async SQLAlchemy 2.0, and JWT auth. The key architecture: **routers** are thin (HTTP only), **services** contain business logic, **repositories** handle data access, and **dependencies** wire everything together with `Depends()`._

@@ -1,6 +1,7 @@
 # Java Snippets
 
 ## Table of Contents
+
 1. [Basic Syntax](#1-basic-syntax)
 2. [Strings](#2-strings)
 3. [Collections & Streams](#3-collections--streams)
@@ -32,6 +33,7 @@
 ## 1. Basic Syntax
 
 ### Hello World
+
 ```java
 public class HelloWorld {
     public static void main(String[] args) {
@@ -41,6 +43,7 @@ public class HelloWorld {
 ```
 
 ### Variables & Data Types
+
 ```java
 // Primitives
 int count = 42;
@@ -63,6 +66,7 @@ var number = 42;            // inferred as int
 ```
 
 ### Input / Output
+
 ```java
 import java.util.Scanner;
 
@@ -83,6 +87,7 @@ public class InputExample {
 ```
 
 ### Arrays
+
 ```java
 // Declaration and initialization
 int[] numbers = new int[5];
@@ -107,6 +112,7 @@ int[] partial = Arrays.copyOfRange(values, 1, 3);
 ```
 
 ### Control Flow
+
 ```java
 // If-else
 if (score >= 90) {
@@ -139,6 +145,7 @@ String status = (age >= 18) ? "Adult" : "Minor";
 ```
 
 ### Loops
+
 ```java
 // For
 for (int i = 0; i < 10; i++) {
@@ -173,6 +180,7 @@ while (it.hasNext()) {
 ## 2. Strings
 
 ### Basic String Operations
+
 ```java
 String s = "Hello World";
 
@@ -230,6 +238,7 @@ String transformed = "42".transform(Integer::parseInt);
 ```
 
 ### StringBuilder
+
 ```java
 StringBuilder sb = new StringBuilder();
 
@@ -251,6 +260,7 @@ String csv = builder.toString();
 ```
 
 ### String Formatting
+
 ```java
 // String.format
 String msg = String.format("Hello %s, you have %d new messages", name, count);
@@ -276,6 +286,7 @@ String html = """
 ```
 
 ### Regex
+
 ```java
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -303,6 +314,7 @@ String cleaned = "a1b2c3".replaceAll("\\d", "");     // "abc"
 ## 3. Collections & Streams
 
 ### List
+
 ```java
 import java.util.*;
 
@@ -341,6 +353,7 @@ list.removeIf(s -> s == null);
 ```
 
 ### Set
+
 ```java
 Set<String> set = new HashSet<>();                         // unordered
 Set<String> linked = new LinkedHashSet<>();                // insertion order
@@ -365,6 +378,7 @@ difference.removeAll(b);
 ```
 
 ### Map
+
 ```java
 Map<String, Integer> map = new HashMap<>();
 Map<String, Integer> linkedMap = new LinkedHashMap<>();    // insertion order
@@ -400,6 +414,7 @@ Map<String, Integer> snapshot = Map.copyOf(original);
 ```
 
 ### Queue & Deque
+
 ```java
 Queue<String> queue = new LinkedList<>();                 // FIFO
 queue.offer("item");                                      // add (returns false if full)
@@ -423,6 +438,7 @@ Queue<Task> pq = new PriorityQueue<>(Comparator.comparingInt(Task::priority));
 ```
 
 ### Stream API
+
 ```java
 List<String> result = items.stream()
     .filter(item -> item.isActive())
@@ -486,6 +502,7 @@ stats.getCount();
 ```
 
 ### Collections Utilities
+
 ```java
 import java.util.Collections;
 
@@ -514,6 +531,7 @@ Collections.fill(list, "default");
 ## 4. Date & Time (java.time)
 
 ### LocalDate, LocalTime, LocalDateTime
+
 ```java
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -556,6 +574,7 @@ boolean isEqual = date1.isEqual(date2);
 ```
 
 ### ZonedDateTime / OffsetDateTime
+
 ```java
 ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"));
 ZonedDateTime utc = ZonedDateTime.now(ZoneOffset.UTC);
@@ -569,6 +588,7 @@ OffsetDateTime fixed = OffsetDateTime.of(2026, 5, 25, 14, 30, 0, 0, ZoneOffset.o
 ```
 
 ### Duration & Period
+
 ```java
 Duration duration = Duration.ofHours(2);
 Duration halfDay = Duration.ofMinutes(30);
@@ -584,6 +604,7 @@ Period age = Period.between(birthDate, today);
 ```
 
 ### Instant
+
 ```java
 Instant now = Instant.now();                            // UTC timestamp
 Instant epoch = Instant.ofEpochSecond(1_700_000_000);
@@ -598,6 +619,7 @@ LocalDateTime ldt = LocalDateTime.ofInstant(now, ZoneId.systemDefault());
 ## 5. File I/O
 
 ### Reading Files
+
 ```java
 import java.nio.file.*;
 import java.io.*;
@@ -630,6 +652,7 @@ try (Scanner scanner = new Scanner(Paths.get("file.txt"))) {
 ```
 
 ### Writing Files
+
 ```java
 // Write bytes
 Files.write(Paths.get("output.txt"), content.getBytes());
@@ -652,6 +675,7 @@ try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("output.txt"))) {
 ```
 
 ### File & Path Operations
+
 ```java
 Path path = Paths.get("dir", "subdir", "file.txt");
 
@@ -687,6 +711,7 @@ try (Stream<Path> walk = Files.walk(Paths.get("src"))) {
 ```
 
 ### Object Serialization
+
 ```java
 import java.io.*;
 
@@ -713,6 +738,7 @@ try (ObjectInputStream in = new ObjectInputStream(
 ## 6. Exception Handling
 
 ### Try-Catch-Finally
+
 ```java
 try {
     riskyOperation();
@@ -726,6 +752,7 @@ try {
 ```
 
 ### Try-with-Resources (Java 7+)
+
 ```java
 try (BufferedReader reader = Files.newBufferedReader(path);
      BufferedWriter writer = Files.newBufferedWriter(output)) {
@@ -740,6 +767,7 @@ try (BufferedReader reader = Files.newBufferedReader(path);
 ```
 
 ### Custom Exceptions
+
 ```java
 // Checked exception
 public class BusinessException extends Exception {
@@ -771,6 +799,7 @@ public class ValidationException extends RuntimeException {
 ```
 
 ### Multi-catch (Java 7+)
+
 ```java
 try {
     parseAndWrite(input);
@@ -780,6 +809,7 @@ try {
 ```
 
 ### Rethrowing (precise, Java 7+)
+
 ```java
 public void process() throws IOException, SQLException {
     try {
@@ -792,6 +822,7 @@ public void process() throws IOException, SQLException {
 ```
 
 ### Try with multiple catches
+
 ```java
 try {
     process();
@@ -802,6 +833,7 @@ try {
 ```
 
 ### Pattern matching for catch (Java 17+ preview / Java 21+)
+
 ```java
 try {
     process();
@@ -819,6 +851,7 @@ try {
 ## 7. Generics
 
 ### Generic Class
+
 ```java
 public class Box<T> {
     private T value;
@@ -842,6 +875,7 @@ String val = stringBox.get();
 ```
 
 ### Generic Method
+
 ```java
 public static <T> T getLast(List<T> list) {
     return list.get(list.size() - 1);
@@ -856,6 +890,7 @@ String last = getLast(List.of("a", "b", "c"));
 ```
 
 ### Bounded Type Parameters
+
 ```java
 // Upper bound
 public static <T extends Comparable<T>> T max(T a, T b) {
@@ -869,6 +904,7 @@ public static <T extends Comparable<T> & Serializable> void process(T item) {
 ```
 
 ### Wildcards
+
 ```java
 // Unbounded
 public static void printList(List<?> list) {
@@ -892,6 +928,7 @@ public static <T> void copy(List<? extends T> src, List<? super T> dest) {
 ```
 
 ### Type Erasure Workarounds
+
 ```java
 // Generic array creation (compile error)
 // T[] array = new T[10]; // Error
@@ -916,6 +953,7 @@ User user = fromJson("{\"name\":\"Alice\"}", User.class);
 ## 8. Enums
 
 ### Basic Enum
+
 ```java
 public enum Status {
     ACTIVE,
@@ -932,6 +970,7 @@ Status[] all = Status.values();
 ```
 
 ### Enum with Fields & Methods
+
 ```java
 public enum HttpStatus {
     OK(200, "OK"),
@@ -969,6 +1008,7 @@ System.out.println(status.isSuccess());       // false
 ```
 
 ### Enum with Abstract Method
+
 ```java
 public enum Operation {
     ADD {
@@ -994,6 +1034,7 @@ double result = Operation.ADD.apply(10, 5); // 15.0
 ```
 
 ### Enum Implementing Interface
+
 ```java
 public interface ErrorCode {
     int getCode();
@@ -1023,6 +1064,7 @@ public enum AppError implements ErrorCode {
 ## 9. Annotations
 
 ### Defining Custom Annotations
+
 ```java
 import java.lang.annotation.*;
 
@@ -1037,6 +1079,7 @@ public @interface Validate {
 ```
 
 ### Using Custom Annotations
+
 ```java
 @Validate(required = true)
 private String name;
@@ -1046,6 +1089,7 @@ private String password;
 ```
 
 ### Processing Annotations
+
 ```java
 public class ValidatorProcessor {
     public static List<String> validate(Object obj) throws IllegalAccessException {
@@ -1081,6 +1125,7 @@ public class ValidatorProcessor {
 ```
 
 ### Built-in Annotations
+
 ```java
 @Deprecated(since = "2.0", forRemoval = true)
 public void oldMethod() {}
@@ -1108,6 +1153,7 @@ interface Calculator {
 ## 10. OOP — Classes & Inheritance
 
 ### Basic Class
+
 ```java
 public class Animal {
     protected String name;
@@ -1136,6 +1182,7 @@ public class Animal {
 ```
 
 ### Inheritance
+
 ```java
 public class Dog extends Animal {
     private String breed;
@@ -1163,6 +1210,7 @@ animal.speak();          // "Rex barks" (polymorphism)
 ```
 
 ### Constructor Chaining
+
 ```java
 public class Employee {
     private String name;
@@ -1186,6 +1234,7 @@ public class Employee {
 ```
 
 ### this vs super
+
 ```java
 public class Parent {
     protected int value;
@@ -1216,6 +1265,7 @@ public class Child extends Parent {
 ```
 
 ### instanceof & Pattern Matching (Java 16+)
+
 ```java
 public void process(Animal animal) {
     // Traditional
@@ -1241,6 +1291,7 @@ public void process(Animal animal) {
 ## 11. OOP — Interfaces & Abstract Classes
 
 ### Interface
+
 ```java
 public interface Drawable {
     // Abstract method (implicitly public abstract)
@@ -1264,6 +1315,7 @@ public interface Drawable {
 ```
 
 ### Interface Implementation
+
 ```java
 public class Circle implements Drawable, Resizable {
     private double radius;
@@ -1285,6 +1337,7 @@ public class Circle implements Drawable, Resizable {
 ```
 
 ### Functional Interface (SAM)
+
 ```java
 @FunctionalInterface
 public interface Transformer<T, R> {
@@ -1300,6 +1353,7 @@ Transformer<String, Integer> ref = String::length;
 ```
 
 ### Abstract Class
+
 ```java
 public abstract class Database {
     protected String connectionString;
@@ -1342,6 +1396,7 @@ public abstract class Database {
 ```
 
 ### Interface vs Abstract Class Comparison
+
 ```java
 // Interface — contract, multiple inheritance of type
 public interface Flyable {
@@ -1380,6 +1435,7 @@ public class FlyingCar extends Vehicle implements Flyable {
 ## 12. OOP — Polymorphism
 
 ### Runtime Polymorphism (Method Overriding)
+
 ```java
 public abstract class Payment {
     public abstract void pay(double amount);
@@ -1411,6 +1467,7 @@ for (Payment p : payments) {
 ```
 
 ### Compile-time Polymorphism (Overloading)
+
 ```java
 public class Calculator {
     public int add(int a, int b) {
@@ -1432,6 +1489,7 @@ public class Calculator {
 ```
 
 ### Covariant Return Types
+
 ```java
 public class Base {
     public Base clone() {
@@ -1448,6 +1506,7 @@ public class Derived extends Base {
 ```
 
 ### Polymorphic Collections
+
 ```java
 List<Shape> shapes = new ArrayList<>();
 shapes.add(new Circle(5));
@@ -1465,6 +1524,7 @@ double totalArea = shapes.stream()
 ## 13. OOP — Composition
 
 ### Composition over Inheritance
+
 ```java
 // Instead of: Engine -> Car (inheritance)
 // Use: Car has-an Engine (composition)
@@ -1507,6 +1567,7 @@ public class Car {
 ```
 
 ### Builder with Composition
+
 ```java
 public class Computer {
     private final CPU cpu;
@@ -1549,6 +1610,7 @@ public class Computer {
 ## 14. OOP — Builder Pattern
 
 ### Classic Builder
+
 ```java
 public class UserProfile {
     private final String firstName;   // required
@@ -1598,6 +1660,7 @@ UserProfile user = new UserProfile.Builder("John", "Doe")
 ```
 
 ### Generic Builder
+
 ```java
 public class GenericBuilder<T> {
     private final Supplier<T> constructor;
@@ -1627,6 +1690,7 @@ Person p = new GenericBuilder<>(Person::new)
 ```
 
 ### Fluent Interface (Self-referential)
+
 ```java
 public class Query {
     private String select;
@@ -1665,6 +1729,7 @@ String sql = new Query()
 ## 15. OOP — Factory Pattern
 
 ### Simple Factory
+
 ```java
 public class PaymentFactory {
     public static Payment create(String type) {
@@ -1682,6 +1747,7 @@ payment.pay(100.0);
 ```
 
 ### Factory Method Pattern
+
 ```java
 public abstract class DocumentGenerator {
     // Factory method
@@ -1715,6 +1781,7 @@ Document doc = generator.generate("Hello");
 ```
 
 ### Abstract Factory
+
 ```java
 public interface UIFactory {
     Button createButton();
@@ -1741,6 +1808,7 @@ button.render();
 ```
 
 ### Static Factory Method
+
 ```java
 public class User {
     private final String email;
@@ -1774,6 +1842,7 @@ User user = User.withEmail("alice@example.com");
 ## 16. OOP — Singleton
 
 ### Eager Singleton
+
 ```java
 public class EagerSingleton {
     private static final EagerSingleton INSTANCE = new EagerSingleton();
@@ -1787,6 +1856,7 @@ public class EagerSingleton {
 ```
 
 ### Lazy Singleton (Thread-safe)
+
 ```java
 public class LazySingleton {
     private static volatile LazySingleton instance;
@@ -1807,6 +1877,7 @@ public class LazySingleton {
 ```
 
 ### Bill Pugh Singleton (Initialization-on-demand)
+
 ```java
 public class BillPughSingleton {
     private BillPughSingleton() {}
@@ -1822,6 +1893,7 @@ public class BillPughSingleton {
 ```
 
 ### Enum Singleton (best for serialization)
+
 ```java
 public enum EnumSingleton {
     INSTANCE;
@@ -1847,6 +1919,7 @@ Database db = EnumSingleton.INSTANCE.getDatabase();
 ## 17. OOP — Strategy Pattern
 
 ### Traditional Strategy
+
 ```java
 public interface CompressionStrategy {
     byte[] compress(byte[] data);
@@ -1910,6 +1983,7 @@ processor.save(data);
 ```
 
 ### Strategy with Lambdas (Java 8+)
+
 ```java
 public class ComparatorExample {
     public static void main(String[] args) {
@@ -1927,6 +2001,7 @@ public class ComparatorExample {
 ```
 
 ### Enum Strategy
+
 ```java
 public enum TaxStrategy {
     VAT_20 {
@@ -1950,6 +2025,7 @@ double tax = TaxStrategy.VAT_20.calculate(100.0);
 ## 18. OOP — Observer Pattern
 
 ### Observer with PropertyChangeSupport (java.beans)
+
 ```java
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -1989,6 +2065,7 @@ model.setName("Alice");  // prints: name: null -> Alice
 ```
 
 ### Custom Observer Pattern
+
 ```java
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -2037,6 +2114,7 @@ nameObservable.set("Bob");     // prints: Name changed to: Bob
 ```
 
 ### Event Bus Pattern
+
 ```java
 public class EventBus {
     private static final Map<Class<?>, List<Consumer<?>>> handlers = new ConcurrentHashMap<>();
@@ -2075,6 +2153,7 @@ EventBus.post(new UserLoggedIn("u1", "Alice"));
 ## 19. OOP — Decorator Pattern
 
 ### Classic Decorator
+
 ```java
 // Component interface
 public interface Coffee {
@@ -2174,6 +2253,7 @@ System.out.println(coffee.getCost());         // 3.5
 ```
 
 ### Functional Decorator (Java 8+)
+
 ```java
 public interface FunctionDecorator {
     static <T, R> Function<T, R> decorate(
@@ -2204,6 +2284,7 @@ logged.apply("hello");
 ## 20. Functional Programming (Streams & Lambdas)
 
 ### Lambda Expressions
+
 ```java
 // No parameters
 Runnable runner = () -> System.out.println("Running");
@@ -2227,6 +2308,7 @@ Function<String, String> addPrefix = name -> prefix + name; // prefix is effecti
 ```
 
 ### Common Functional Interfaces
+
 ```java
 // java.util.function package
 
@@ -2260,6 +2342,7 @@ BiConsumer<String, Integer> printEntry = (k, v) -> System.out.println(k + "=" + 
 ```
 
 ### Method & Constructor References
+
 ```java
 // Static method reference
 Function<String, Integer> parseInt = Integer::parseInt;
@@ -2279,6 +2362,7 @@ Function<String, StringBuilder> sbCreator = StringBuilder::new;
 ```
 
 ### Optional with Lambdas
+
 ```java
 Optional<String> opt = Optional.of("hello");
 
@@ -2288,6 +2372,7 @@ String result = opt.orElseThrow(() -> new NoSuchElementException());
 ```
 
 ### Collectors to Map
+
 ```java
 // toMap
 Map<String, Integer> nameToLength = names.stream()
@@ -2311,6 +2396,7 @@ Map<Boolean, List<Integer>> partitioned = numbers.stream()
 ## 21. Optional
 
 ### Creating Optional
+
 ```java
 Optional<String> empty = Optional.empty();
 Optional<String> ofNonNull = Optional.of("hello");       // throws NPE if null
@@ -2318,6 +2404,7 @@ Optional<String> nullable = Optional.ofNullable(value);  // safe for null
 ```
 
 ### Checking & Getting
+
 ```java
 if (optional.isPresent()) {
     String value = optional.get();
@@ -2339,6 +2426,7 @@ optional.ifPresentOrElse(
 ```
 
 ### Transforming
+
 ```java
 Optional<Integer> length = optional.map(String::length);
 Optional<String> upper = optional.flatMap(s -> Optional.of(s.toUpperCase()));
@@ -2346,6 +2434,7 @@ Optional<String> filtered = optional.filter(s -> s.length() > 3);
 ```
 
 ### Defaults & Throwing
+
 ```java
 String result = optional.orElse("default");
 String computed = optional.orElseGet(() -> computeExpensiveDefault());
@@ -2356,6 +2445,7 @@ String orElseThrow = optional.orElseThrow(); // throws NoSuchElementException
 ```
 
 ### Optional in Streams (Java 9+)
+
 ```java
 // flatMap Optional to Stream
 List<String> result = optionals.stream()
@@ -2364,6 +2454,7 @@ List<String> result = optionals.stream()
 ```
 
 ### Optional Builders
+
 ```java
 public class UserRepository {
     public Optional<User> findById(String id) {
@@ -2382,6 +2473,7 @@ User user = repository.findById("123")
 ## 22. Concurrency & Threading
 
 ### Thread Basics
+
 ```java
 // Extend Thread
 class Worker extends Thread {
@@ -2401,6 +2493,7 @@ new Thread(task, "worker-1").start();
 ```
 
 ### ExecutorService
+
 ```java
 import java.util.concurrent.*;
 
@@ -2443,6 +2536,7 @@ executor.awaitTermination(5, TimeUnit.SECONDS);
 ```
 
 ### CompletableFuture
+
 ```java
 import java.util.concurrent.CompletableFuture;
 
@@ -2476,6 +2570,7 @@ CompletableFuture.supplyAsync(() -> compute());  // uses ForkJoinPool.commonPool
 ```
 
 ### Synchronization
+
 ```java
 // Synchronized method
 public synchronized void increment() {
@@ -2535,6 +2630,7 @@ public void write(T value) {
 ```
 
 ### Concurrent Collections
+
 ```java
 // Thread-safe collections
 Map<String, String> concurrentMap = new ConcurrentHashMap<>();
@@ -2559,6 +2655,7 @@ String item = queue.poll(1, TimeUnit.SECONDS);  // timeout
 ```
 
 ### Atomic Variables
+
 ```java
 import java.util.concurrent.atomic.*;
 
@@ -2578,6 +2675,7 @@ counter.accumulateAndGet(5, Integer::sum);
 ```
 
 ### ThreadLocal
+
 ```java
 private static final ThreadLocal<SimpleDateFormat> dateFormat =
     ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd"));
@@ -2599,6 +2697,7 @@ public class RequestContext {
 ```
 
 ### Phaser / CountDownLatch / CyclicBarrier / Semaphore
+
 ```java
 // CountDownLatch (one-time)
 CountDownLatch latch = new CountDownLatch(3);
@@ -2627,6 +2726,7 @@ phaser.arriveAndDeregister();    // leave
 ## 23. Records (Java 16+)
 
 ### Basic Record
+
 ```java
 public record Point(int x, int y) {}
 
@@ -2640,6 +2740,7 @@ int hash = p.hashCode();
 ```
 
 ### Record with Validation
+
 ```java
 public record Person(String name, int age) {
     // Compact constructor
@@ -2655,6 +2756,7 @@ public record Person(String name, int age) {
 ```
 
 ### Record with Methods
+
 ```java
 public record Rectangle(double width, double height) {
     public double area() {
@@ -2677,6 +2779,7 @@ public record Rectangle(double width, double height) {
 ```
 
 ### Record with Multiple Constructors
+
 ```java
 public record Email(String address, String displayName) {
     public Email(String address) {
@@ -2691,6 +2794,7 @@ public record Email(String address, String displayName) {
 ```
 
 ### Generic Record
+
 ```java
 public record Pair<T, U>(T first, U second) {
     public static <T, U> Pair<T, U> of(T first, U second) {
@@ -2707,6 +2811,7 @@ String first = pair.first();       // "age"
 ```
 
 ### Record with Custom Serialization
+
 ```java
 import java.io.Serializable;
 
@@ -2720,6 +2825,7 @@ public record Config(String host, int port) implements Serializable {
 ```
 
 ### Local Records (Java 16+, inside method)
+
 ```java
 public List<String> processTransactions(List<Transaction> transactions) {
     // Local record
@@ -2742,6 +2848,7 @@ public List<String> processTransactions(List<Transaction> transactions) {
 ## 24. Sealed Classes (Java 17+)
 
 ### Basic Sealed Class
+
 ```java
 public sealed class Shape
     permits Circle, Rectangle, Triangle {
@@ -2767,6 +2874,7 @@ final class Triangle extends Shape {
 ```
 
 ### Sealed Interface
+
 ```java
 public sealed interface Notification
     permits EmailNotification, SMSNotification, PushNotification {
@@ -2793,6 +2901,7 @@ record PushNotification(String deviceToken) implements Notification {
 ```
 
 ### Sealed Hierarchy with non-sealed permit
+
 ```java
 public sealed abstract class Vehicle permits Car, Truck, Motorcycle {
     public abstract String getType();
@@ -2817,6 +2926,7 @@ final class SUV extends Car {
 ```
 
 ### Exhaustive Switch with Sealed Classes
+
 ```java
 public String describeShape(Shape shape) {
     return switch (shape) {
@@ -2833,6 +2943,7 @@ public String describeShape(Shape shape) {
 ## 25. Pattern Matching (Java 17+/21+)
 
 ### Pattern Matching for instanceof (Java 16+)
+
 ```java
 public void process(Shape shape) {
     if (shape instanceof Circle c) {
@@ -2849,6 +2960,7 @@ public void process(Shape shape) {
 ```
 
 ### Pattern Matching for switch (Java 17+ preview, Java 21+)
+
 ```java
 public String classify(Shape shape) {
     return switch (shape) {
@@ -2867,6 +2979,7 @@ public String classify(Shape shape) {
 ```
 
 ### Guarded Patterns (Java 17+ preview)
+
 ```java
 public String describe(Object obj) {
     return switch (obj) {
@@ -2881,6 +2994,7 @@ public String describe(Object obj) {
 ```
 
 ### Record Patterns (Java 21+)
+
 ```java
 public record Point(int x, int y) {}
 public record Line(Point start, Point end) {}
@@ -2909,6 +3023,7 @@ if (obj instanceof Line(Point start, Point end)) {
 ```
 
 ### Exhaustive Pattern Matching
+
 ```java
 sealed interface Tree permits Leaf, Node {}
 record Leaf(int value) implements Tree {}

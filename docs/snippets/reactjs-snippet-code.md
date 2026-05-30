@@ -10,9 +10,7 @@
 
 ```jsx
 export default function MyComponent() {
-  return (
-    <div>MyComponent</div>
-  );
+  return <div>MyComponent</div>;
 }
 ```
 
@@ -20,9 +18,7 @@ export default function MyComponent() {
 
 ```jsx
 export default function Greeting({ name }) {
-  return (
-    <div>Hello, {name}!</div>
-  );
+  return <div>Hello, {name}!</div>;
 }
 ```
 
@@ -30,9 +26,7 @@ export default function Greeting({ name }) {
 
 ```jsx
 const MyComponent = () => {
-  return (
-    <div>MyComponent</div>
-  );
+  return <div>MyComponent</div>;
 };
 
 export default MyComponent;
@@ -50,7 +44,9 @@ type Props = {
 export default function Card({ title, count, children }: Props) {
   return (
     <div>
-      <h2>{title} ({count})</h2>
+      <h2>
+        {title} ({count})
+      </h2>
       {children}
     </div>
   );
@@ -60,12 +56,14 @@ export default function Card({ title, count, children }: Props) {
 ### React.memo Component
 
 ```jsx
-import { memo } from 'react';
+import { memo } from "react";
 
 const ExpensiveList = memo(({ items }) => {
   return (
     <ul>
-      {items.map(item => <li key={item.id}>{item.name}</li>)}
+      {items.map((item) => (
+        <li key={item.id}>{item.name}</li>
+      ))}
     </ul>
   );
 });
@@ -98,7 +96,7 @@ export default function Panel({ title, children }) {
 ### Basic Counter
 
 ```jsx
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Counter() {
   const [count, setCount] = useState(0);
@@ -106,7 +104,7 @@ export default function Counter() {
   return (
     <div>
       <p>Count: {count}</p>
-      <button onClick={() => setCount(c => c + 1)}>+1</button>
+      <button onClick={() => setCount((c) => c + 1)}>+1</button>
       <button onClick={() => setCount(0)}>Reset</button>
     </div>
   );
@@ -116,14 +114,14 @@ export default function Counter() {
 ### Toggle (boolean state)
 
 ```jsx
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Toggle() {
   const [isOn, setIsOn] = useState(false);
 
   return (
-    <button onClick={() => setIsOn(prev => !prev)}>
-      {isOn ? 'ON' : 'OFF'}
+    <button onClick={() => setIsOn((prev) => !prev)}>
+      {isOn ? "ON" : "OFF"}
     </button>
   );
 }
@@ -132,11 +130,11 @@ export default function Toggle() {
 ### Controlled Input
 
 ```jsx
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Form() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -145,8 +143,16 @@ export default function Form() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input value={name} onChange={e => setName(e.target.value)} placeholder="Name" />
-      <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
+      <input
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Name"
+      />
+      <input
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+      />
       <button type="submit">Submit</button>
     </form>
   );
@@ -156,23 +162,29 @@ export default function Form() {
 ### Derived State (no useEffect needed)
 
 ```jsx
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from "react";
 
 export default function ProductList({ products }) {
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState("");
 
   // Derived state — no useEffect needed
   const filtered = useMemo(() => {
-    return products.filter(p =>
-      p.name.toLowerCase().includes(filter.toLowerCase())
+    return products.filter((p) =>
+      p.name.toLowerCase().includes(filter.toLowerCase()),
     );
   }, [products, filter]);
 
   return (
     <div>
-      <input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search..." />
+      <input
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+        placeholder="Search..."
+      />
       <ul>
-        {filtered.map(p => <li key={p.id}>{p.name}</li>)}
+        {filtered.map((p) => (
+          <li key={p.id}>{p.name}</li>
+        ))}
       </ul>
     </div>
   );
@@ -186,7 +198,7 @@ export default function ProductList({ products }) {
 ### Basic useEffect (data fetching)
 
 ```jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function UserProfile({ userId }) {
   const [user, setUser] = useState(null);
@@ -198,24 +210,26 @@ export default function UserProfile({ userId }) {
 
     setLoading(true);
     fetch(`/api/users/${userId}`)
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch');
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch");
         return res.json();
       })
-      .then(data => {
+      .then((data) => {
         if (!ignore) {
           setUser(data);
           setLoading(false);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         if (!ignore) {
           setError(err.message);
           setLoading(false);
         }
       });
 
-    return () => { ignore = true; };
+    return () => {
+      ignore = true;
+    };
   }, [userId]);
 
   if (loading) return <div>Loading...</div>;
@@ -227,7 +241,7 @@ export default function UserProfile({ userId }) {
 ### useEffect with Cleanup (event listeners)
 
 ```jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function WindowTracker() {
   const [width, setWidth] = useState(window.innerWidth);
@@ -235,8 +249,8 @@ export default function WindowTracker() {
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return <div>Window width: {width}px</div>;
@@ -246,14 +260,14 @@ export default function WindowTracker() {
 ### useEffect with Timer (setInterval)
 
 ```jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function Timer() {
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
     const id = setInterval(() => {
-      setSeconds(s => s + 1);
+      setSeconds((s) => s + 1);
     }, 1000);
 
     return () => clearInterval(id);
@@ -266,10 +280,10 @@ export default function Timer() {
 ### Debounced Search Effect
 
 ```jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function SearchResults() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
 
   useEffect(() => {
@@ -289,8 +303,16 @@ export default function SearchResults() {
 
   return (
     <div>
-      <input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search..." />
-      <ul>{results.map(r => <li key={r.id}>{r.name}</li>)}</ul>
+      <input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search..."
+      />
+      <ul>
+        {results.map((r) => (
+          <li key={r.id}>{r.name}</li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -299,7 +321,7 @@ export default function SearchResults() {
 ### AbortController for Fetch Cleanup
 
 ```jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function Search({ query }) {
   const [results, setResults] = useState([]);
@@ -308,16 +330,22 @@ export default function Search({ query }) {
     const controller = new AbortController();
 
     fetch(`/api/search?q=${query}`, { signal: controller.signal })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(setResults)
-      .catch(err => {
-        if (err.name !== 'AbortError') console.error(err);
+      .catch((err) => {
+        if (err.name !== "AbortError") console.error(err);
       });
 
     return () => controller.abort();
   }, [query]);
 
-  return <ul>{results.map(r => <li key={r.id}>{r.name}</li>)}</ul>;
+  return (
+    <ul>
+      {results.map((r) => (
+        <li key={r.id}>{r.name}</li>
+      ))}
+    </ul>
+  );
 }
 ```
 
@@ -328,7 +356,7 @@ export default function Search({ query }) {
 ### Focus Input
 
 ```jsx
-import { useRef } from 'react';
+import { useRef } from "react";
 
 export default function Form() {
   const inputRef = useRef(null);
@@ -349,7 +377,7 @@ export default function Form() {
 ### Track Previous Value
 
 ```jsx
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from "react";
 
 export default function Counter() {
   const [count, setCount] = useState(0);
@@ -363,8 +391,10 @@ export default function Counter() {
 
   return (
     <div>
-      <p>Now: {count}, before: {prevCount}</p>
-      <button onClick={() => setCount(c => c + 1)}>Increment</button>
+      <p>
+        Now: {count}, before: {prevCount}
+      </p>
+      <button onClick={() => setCount((c) => c + 1)}>Increment</button>
     </div>
   );
 }
@@ -373,7 +403,7 @@ export default function Counter() {
 ### Stopwatch (interval ID in ref)
 
 ```jsx
-import { useState, useRef } from 'react';
+import { useState, useRef } from "react";
 
 export default function Stopwatch() {
   const [startTime, setStartTime] = useState(null);
@@ -408,10 +438,10 @@ export default function Stopwatch() {
 ### Reading Latest State in Async Code
 
 ```jsx
-import { useState, useRef } from 'react';
+import { useState, useRef } from "react";
 
 export default function Chat() {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const textRef = useRef(text);
 
   const handleChange = (e) => {
@@ -421,7 +451,7 @@ export default function Chat() {
 
   const handleSend = () => {
     setTimeout(() => {
-      alert('Sending: ' + textRef.current);
+      alert("Sending: " + textRef.current);
     }, 3000);
   };
 
@@ -441,15 +471,18 @@ export default function Chat() {
 ### Expensive Computation with useMemo
 
 ```jsx
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
 export default function Report({ transactions }) {
   const totals = useMemo(() => {
-    return transactions.reduce((acc, t) => {
-      acc.total += t.amount;
-      acc.count += 1;
-      return acc;
-    }, { total: 0, count: 0 });
+    return transactions.reduce(
+      (acc, t) => {
+        acc.total += t.amount;
+        acc.count += 1;
+        return acc;
+      },
+      { total: 0, count: 0 },
+    );
   }, [transactions]);
 
   return (
@@ -464,8 +497,8 @@ export default function Report({ transactions }) {
 ### Stable Callback with useCallback
 
 ```jsx
-import { useState, useCallback } from 'react';
-import { memo } from 'react';
+import { useState, useCallback } from "react";
+import { memo } from "react";
 
 const ExpensiveChild = memo(({ onClick }) => {
   return <button onClick={onClick}>Click me</button>;
@@ -475,7 +508,7 @@ export default function Parent() {
   const [count, setCount] = useState(0);
 
   const handleClick = useCallback(() => {
-    setCount(c => c + 1);
+    setCount((c) => c + 1);
   }, []);
 
   return (
@@ -494,14 +527,18 @@ export default function Parent() {
 ### Basic useReducer
 
 ```jsx
-import { useReducer } from 'react';
+import { useReducer } from "react";
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'increment': return { count: state.count + 1 };
-    case 'decrement': return { count: state.count - 1 };
-    case 'reset': return { count: 0 };
-    default: return state;
+    case "increment":
+      return { count: state.count + 1 };
+    case "decrement":
+      return { count: state.count - 1 };
+    case "reset":
+      return { count: 0 };
+    default:
+      return state;
   }
 };
 
@@ -511,9 +548,9 @@ export default function Counter() {
   return (
     <div>
       <p>Count: {state.count}</p>
-      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
-      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
-      <button onClick={() => dispatch({ type: 'reset' })}>Reset</button>
+      <button onClick={() => dispatch({ type: "increment" })}>+</button>
+      <button onClick={() => dispatch({ type: "decrement" })}>-</button>
+      <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
     </div>
   );
 }
@@ -522,7 +559,7 @@ export default function Counter() {
 ### Async State Reducer
 
 ```jsx
-import { useReducer } from 'react';
+import { useReducer } from "react";
 
 const initialState = {
   data: null,
@@ -532,10 +569,14 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'fetch': return { ...state, loading: true, error: null };
-    case 'success': return { loading: false, data: action.payload, error: null };
-    case 'error': return { loading: false, data: null, error: action.payload };
-    default: return state;
+    case "fetch":
+      return { ...state, loading: true, error: null };
+    case "success":
+      return { loading: false, data: action.payload, error: null };
+    case "error":
+      return { loading: false, data: null, error: action.payload };
+    default:
+      return state;
   }
 };
 
@@ -543,14 +584,14 @@ export default function UserProfile({ userId }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const loadUser = async () => {
-    dispatch({ type: 'fetch' });
+    dispatch({ type: "fetch" });
     try {
       const res = await fetch(`/api/users/${userId}`);
-      if (!res.ok) throw new Error('Not found');
+      if (!res.ok) throw new Error("Not found");
       const data = await res.json();
-      dispatch({ type: 'success', payload: data });
+      dispatch({ type: "success", payload: data });
     } catch (err) {
-      dispatch({ type: 'error', payload: err.message });
+      dispatch({ type: "error", payload: err.message });
     }
   };
 
@@ -565,16 +606,19 @@ export default function UserProfile({ userId }) {
 ### Context Provider with Reducer
 
 ```jsx
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useReducer } from "react";
 
 const AuthContext = createContext(null);
 const AuthDispatchContext = createContext(null);
 
 const authReducer = (state, action) => {
   switch (action.type) {
-    case 'login': return { ...state, user: action.payload };
-    case 'logout': return { ...state, user: null };
-    default: return state;
+    case "login":
+      return { ...state, user: action.payload };
+    case "logout":
+      return { ...state, user: null };
+    default:
+      return state;
   }
 };
 
@@ -602,7 +646,7 @@ export function useAuthDispatch() {
 ### Using the Context
 
 ```jsx
-import { useAuth, useAuthDispatch } from './AuthProvider';
+import { useAuth, useAuthDispatch } from "./AuthProvider";
 
 export default function LoginButton() {
   const { user } = useAuth();
@@ -612,13 +656,13 @@ export default function LoginButton() {
     return (
       <div>
         Welcome, {user.name}
-        <button onClick={() => dispatch({ type: 'logout' })}>Logout</button>
+        <button onClick={() => dispatch({ type: "logout" })}>Logout</button>
       </div>
     );
   }
 
   const login = () => {
-    dispatch({ type: 'login', payload: { name: 'Alice' } });
+    dispatch({ type: "login", payload: { name: "Alice" } });
   };
 
   return <button onClick={login}>Login</button>;
@@ -632,7 +676,7 @@ export default function LoginButton() {
 ### useFetch
 
 ```jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export function useFetch(url) {
   const [data, setData] = useState(null);
@@ -647,18 +691,18 @@ export function useFetch(url) {
 
     setLoading(true);
     fetch(url, { signal: controller.signal })
-      .then(res => {
+      .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
-      .then(json => {
+      .then((json) => {
         if (!ignore) {
           setData(json);
           setLoading(false);
         }
       })
-      .catch(err => {
-        if (!ignore && err.name !== 'AbortError') {
+      .catch((err) => {
+        if (!ignore && err.name !== "AbortError") {
           setError(err.message);
           setLoading(false);
         }
@@ -680,7 +724,7 @@ export function useFetch(url) {
 ### useDebounce
 
 ```jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export function useDebounce(value, delay = 300) {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -700,7 +744,7 @@ export function useDebounce(value, delay = 300) {
 ### useLocalStorage
 
 ```jsx
-import { useState } from 'react';
+import { useState } from "react";
 
 export function useLocalStorage(key, initialValue) {
   const [value, setValue] = useState(() => {
@@ -727,7 +771,7 @@ export function useLocalStorage(key, initialValue) {
 ### useOnlineStatus
 
 ```jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export function useOnlineStatus() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -736,11 +780,11 @@ export function useOnlineStatus() {
     const goOnline = () => setIsOnline(true);
     const goOffline = () => setIsOnline(false);
 
-    window.addEventListener('online', goOnline);
-    window.addEventListener('offline', goOffline);
+    window.addEventListener("online", goOnline);
+    window.addEventListener("offline", goOffline);
     return () => {
-      window.removeEventListener('online', goOnline);
-      window.removeEventListener('offline', goOffline);
+      window.removeEventListener("online", goOnline);
+      window.removeEventListener("offline", goOffline);
     };
   }, []);
 
@@ -754,7 +798,7 @@ export function useOnlineStatus() {
 ### useWindowSize
 
 ```jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export function useWindowSize() {
   const [size, setSize] = useState({
@@ -767,8 +811,8 @@ export function useWindowSize() {
       setSize({ width: window.innerWidth, height: window.innerHeight });
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return size;
@@ -781,13 +825,13 @@ export function useWindowSize() {
 ### useCounter
 
 ```jsx
-import { useState } from 'react';
+import { useState } from "react";
 
 export function useCounter(initialValue = 0) {
   const [count, setCount] = useState(initialValue);
 
-  const increment = () => setCount(prev => prev + 1);
-  const decrement = () => setCount(prev => prev - 1);
+  const increment = () => setCount((prev) => prev + 1);
+  const decrement = () => setCount((prev) => prev - 1);
   const reset = () => setCount(initialValue);
   const set = (n) => setCount(n);
 
@@ -801,7 +845,7 @@ export function useCounter(initialValue = 0) {
 ### useIntersectionObserver (infinite scroll)
 
 ```jsx
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 export function useIntersectionObserver(options = {}) {
   const ref = useRef(null);
@@ -811,9 +855,12 @@ export function useIntersectionObserver(options = {}) {
     const element = ref.current;
     if (!element) return;
 
-    const observer = new IntersectionObserver(([entry]) => {
-      setIsIntersecting(entry.isIntersecting);
-    }, { threshold: 0.1, ...options });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsIntersecting(entry.isIntersecting);
+      },
+      { threshold: 0.1, ...options },
+    );
 
     observer.observe(element);
     return () => observer.disconnect();
@@ -830,7 +877,7 @@ export function useIntersectionObserver(options = {}) {
 ### usePrevious
 
 ```jsx
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect } from "react";
 
 export function usePrevious(value) {
   const ref = useRef();
@@ -853,18 +900,18 @@ export function usePrevious(value) {
 ### Form Submit
 
 ```jsx
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch('/api/login', {
-      method: 'POST',
+    const res = await fetch("/api/login", {
+      method: "POST",
       body: JSON.stringify({ email, password }),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
     });
     if (res.ok) {
       // redirect or update state
@@ -873,8 +920,16 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
-      <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <button type="submit">Login</button>
     </form>
   );
@@ -884,13 +939,13 @@ export default function LoginForm() {
 ### Inline Change Handler (dynamic fields)
 
 ```jsx
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function DynamicForm() {
-  const [fields, setFields] = useState({ name: '', email: '', role: '' });
+  const [fields, setFields] = useState({ name: "", email: "", role: "" });
 
   const handleChange = (e) => {
-    setFields(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setFields((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   return (
@@ -913,8 +968,10 @@ export default function DynamicForm() {
 export default function UserList({ users }) {
   return (
     <ul>
-      {users.map(user => (
-        <li key={user.id}>{user.name} - {user.email}</li>
+      {users.map((user) => (
+        <li key={user.id}>
+          {user.name} - {user.email}
+        </li>
       ))}
     </ul>
   );
@@ -924,22 +981,28 @@ export default function UserList({ users }) {
 ### Filterable List
 
 ```jsx
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from "react";
 
 export default function FilterableList({ items }) {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   const filtered = useMemo(() => {
-    return items.filter(item =>
-      item.name.toLowerCase().includes(query.toLowerCase())
+    return items.filter((item) =>
+      item.name.toLowerCase().includes(query.toLowerCase()),
     );
   }, [items, query]);
 
   return (
     <div>
-      <input value={query} onChange={e => setQuery(e.target.value)} placeholder="Filter..." />
+      <input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Filter..."
+      />
       <ul>
-        {filtered.map(item => <li key={item.id}>{item.name}</li>)}
+        {filtered.map((item) => (
+          <li key={item.id}>{item.name}</li>
+        ))}
       </ul>
     </div>
   );
@@ -949,23 +1012,29 @@ export default function FilterableList({ items }) {
 ### List with useDeferredValue (performance)
 
 ```jsx
-import { useState, useDeferredValue, useMemo } from 'react';
+import { useState, useDeferredValue, useMemo } from "react";
 
 export default function LargeList({ items }) {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
 
   const filtered = useMemo(() => {
-    return items.filter(item =>
-      item.name.toLowerCase().includes(deferredQuery.toLowerCase())
+    return items.filter((item) =>
+      item.name.toLowerCase().includes(deferredQuery.toLowerCase()),
     );
   }, [items, deferredQuery]);
 
   return (
     <div>
-      <input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search..." />
+      <input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search..."
+      />
       <ul style={{ opacity: query !== deferredQuery ? 0.5 : 1 }}>
-        {filtered.map(item => <li key={item.id}>{item.name}</li>)}
+        {filtered.map((item) => (
+          <li key={item.id}>{item.name}</li>
+        ))}
       </ul>
     </div>
   );
@@ -982,7 +1051,7 @@ export default function UserList({ users }) {
 
   return (
     <ul>
-      {users.map(user => (
+      {users.map((user) => (
         <li key={user.id}>{user.name}</li>
       ))}
     </ul>
@@ -995,24 +1064,24 @@ export default function UserList({ users }) {
 ## 11. Modal Component
 
 ```jsx
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 export default function Modal({ isOpen, onClose, title, children }) {
   const overlayRef = useRef(null);
 
   useEffect(() => {
     const handleEscape = (e) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === "Escape") onClose();
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden';
+      document.addEventListener("keydown", handleEscape);
+      document.body.style.overflow = "hidden";
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = '';
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "";
     };
   }, [isOpen, onClose]);
 
@@ -1022,13 +1091,33 @@ export default function Modal({ isOpen, onClose, title, children }) {
     <div
       ref={overlayRef}
       style={{
-        position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000,
+        position: "fixed",
+        inset: 0,
+        background: "rgba(0,0,0,0.5)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 1000,
       }}
-      onClick={(e) => { if (e.target === overlayRef.current) onClose(); }}
+      onClick={(e) => {
+        if (e.target === overlayRef.current) onClose();
+      }}
     >
-      <div style={{ background: '#fff', padding: 24, borderRadius: 8, minWidth: 400 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
+      <div
+        style={{
+          background: "#fff",
+          padding: 24,
+          borderRadius: 8,
+          minWidth: 400,
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: 16,
+          }}
+        >
           <h2>{title}</h2>
           <button onClick={onClose}>&times;</button>
         </div>
@@ -1050,31 +1139,34 @@ export default function Modal({ isOpen, onClose, title, children }) {
 ## 12. Tabs Component
 
 ```jsx
-import { useState } from 'react';
+import { useState } from "react";
 
 const tabs = [
-  { id: 'profile', label: 'Profile' },
-  { id: 'settings', label: 'Settings' },
-  { id: 'notifications', label: 'Notifications' },
+  { id: "profile", label: "Profile" },
+  { id: "settings", label: "Settings" },
+  { id: "notifications", label: "Notifications" },
 ];
 
 export default function Tabs() {
-  const [activeTab, setActiveTab] = useState('profile');
+  const [activeTab, setActiveTab] = useState("profile");
 
   return (
     <div>
-      <div style={{ display: 'flex', gap: 8, borderBottom: '2px solid #ddd' }}>
-        {tabs.map(tab => (
+      <div style={{ display: "flex", gap: 8, borderBottom: "2px solid #ddd" }}>
+        {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             style={{
-              padding: '8px 16px',
-              border: 'none',
-              borderBottom: activeTab === tab.id ? '2px solid blue' : '2px solid transparent',
-              background: 'transparent',
-              cursor: 'pointer',
-              fontWeight: activeTab === tab.id ? 'bold' : 'normal',
+              padding: "8px 16px",
+              border: "none",
+              borderBottom:
+                activeTab === tab.id
+                  ? "2px solid blue"
+                  : "2px solid transparent",
+              background: "transparent",
+              cursor: "pointer",
+              fontWeight: activeTab === tab.id ? "bold" : "normal",
             }}
           >
             {tab.label}
@@ -1082,9 +1174,9 @@ export default function Tabs() {
         ))}
       </div>
       <div style={{ padding: 16 }}>
-        {activeTab === 'profile' && <div>Profile content</div>}
-        {activeTab === 'settings' && <div>Settings content</div>}
-        {activeTab === 'notifications' && <div>Notifications content</div>}
+        {activeTab === "profile" && <div>Profile content</div>}
+        {activeTab === "settings" && <div>Settings content</div>}
+        {activeTab === "notifications" && <div>Notifications content</div>}
       </div>
     </div>
   );
@@ -1096,7 +1188,7 @@ export default function Tabs() {
 ## 13. Error Boundary
 
 ```jsx
-import { Component } from 'react';
+import { Component } from "react";
 
 export default class ErrorBoundary extends Component {
   constructor(props) {
@@ -1109,16 +1201,18 @@ export default class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, info) {
-    console.error('ErrorBoundary caught:', error, info);
+    console.error("ErrorBoundary caught:", error, info);
   }
 
   render() {
     if (this.state.hasError) {
       return (
-        <div style={{ padding: 24, textAlign: 'center' }}>
+        <div style={{ padding: 24, textAlign: "center" }}>
           <h2>Something went wrong</h2>
           <p>{this.state.error?.message}</p>
-          <button onClick={() => this.setState({ hasError: false, error: null })}>
+          <button
+            onClick={() => this.setState({ hasError: false, error: null })}
+          >
             Try again
           </button>
         </div>
@@ -1140,13 +1234,10 @@ export default class ErrorBoundary extends Component {
 ## 14. React Portal
 
 ```jsx
-import { createPortal } from 'react-dom';
+import { createPortal } from "react-dom";
 
 export default function Portal({ children }) {
-  return createPortal(
-    children,
-    document.body
-  );
+  return createPortal(children, document.body);
 }
 
 // Usage:
@@ -1160,9 +1251,18 @@ export default function Portal({ children }) {
 ## 15. React Router Setup
 
 ```jsx
-import { BrowserRouter, Routes, Route, Link, useParams, useNavigate } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useParams,
+  useNavigate,
+} from "react-router-dom";
 
-function Home() { return <h1>Home</h1>; }
+function Home() {
+  return <h1>Home</h1>;
+}
 
 function User() {
   const { id } = useParams();
@@ -1171,7 +1271,7 @@ function User() {
   return (
     <div>
       <h1>User: {id}</h1>
-      <button onClick={() => navigate('/')}>Back</button>
+      <button onClick={() => navigate("/")}>Back</button>
     </div>
   );
 }
@@ -1197,10 +1297,10 @@ export default function App() {
 ## 16. React.lazy + Suspense
 
 ```jsx
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense } from "react";
 
-const Dashboard = lazy(() => import('./Dashboard'));
-const Settings = lazy(() => import('./Settings'));
+const Dashboard = lazy(() => import("./Dashboard"));
+const Settings = lazy(() => import("./Settings"));
 
 export default function App() {
   return (
@@ -1217,10 +1317,10 @@ export default function App() {
 ## 17. forwardRef (ref forwarding)
 
 ```jsx
-import { forwardRef } from 'react';
+import { forwardRef } from "react";
 
 const FancyInput = forwardRef((props, ref) => {
-  return <input ref={ref} style={{ border: '2px solid blue' }} {...props} />;
+  return <input ref={ref} style={{ border: "2px solid blue" }} {...props} />;
 });
 
 export default FancyInput;
@@ -1236,14 +1336,16 @@ export default FancyInput;
 ## 18. useImperativeHandle
 
 ```jsx
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from "react";
 
 const CustomInput = forwardRef((props, ref) => {
   const inputRef = useRef(null);
 
   useImperativeHandle(ref, () => ({
     focus: () => inputRef.current?.focus(),
-    clear: () => { inputRef.current.value = ''; },
+    clear: () => {
+      inputRef.current.value = "";
+    },
     getValue: () => inputRef.current?.value,
   }));
 
@@ -1264,16 +1366,26 @@ export default CustomInput;
 ## 19. Loading Spinner
 
 ```jsx
-export default function Spinner({ size = 40, color = '#007bff' }) {
+export default function Spinner({ size = 40, color = "#007bff" }) {
   return (
-    <div style={{
-      display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 24,
-    }}>
-      <div style={{
-        width: size, height: size, border: `4px solid #e0e0e0`,
-        borderTop: `4px solid ${color}`, borderRadius: '50%',
-        animation: 'spin 0.8s linear infinite',
-      }} />
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 24,
+      }}
+    >
+      <div
+        style={{
+          width: size,
+          height: size,
+          border: `4px solid #e0e0e0`,
+          borderTop: `4px solid ${color}`,
+          borderRadius: "50%",
+          animation: "spin 0.8s linear infinite",
+        }}
+      />
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
   );
@@ -1288,11 +1400,11 @@ export default function Spinner({ size = 40, color = '#007bff' }) {
 ## 20. Debounced Search (full example)
 
 ```jsx
-import { useState, useEffect } from 'react';
-import { useDebounce } from './useDebounce';
+import { useState, useEffect } from "react";
+import { useDebounce } from "./useDebounce";
 
 export default function SearchPage() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const debouncedQuery = useDebounce(query, 300);
@@ -1307,28 +1419,34 @@ export default function SearchPage() {
     setLoading(true);
 
     fetch(`/api/search?q=${encodeURIComponent(debouncedQuery)}`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (!cancelled) {
           setResults(data);
           setLoading(false);
         }
       })
-      .catch(() => { if (!cancelled) setLoading(false); });
+      .catch(() => {
+        if (!cancelled) setLoading(false);
+      });
 
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [debouncedQuery]);
 
   return (
     <div>
       <input
         value={query}
-        onChange={e => setQuery(e.target.value)}
+        onChange={(e) => setQuery(e.target.value)}
         placeholder="Search..."
       />
       {loading && <div>Searching...</div>}
       <ul>
-        {results.map(item => <li key={item.id}>{item.name}</li>)}
+        {results.map((item) => (
+          <li key={item.id}>{item.name}</li>
+        ))}
       </ul>
     </div>
   );
@@ -1340,7 +1458,7 @@ export default function SearchPage() {
 ## 21. Compound Components (Advanced Pattern)
 
 ```jsx
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from "react";
 
 const AccordionContext = createContext(null);
 
@@ -1361,7 +1479,12 @@ function Item({ index, title, children }) {
     <div>
       <button
         onClick={() => setOpenIndex(isOpen ? null : index)}
-        style={{ width: '100%', textAlign: 'left', padding: 12, fontWeight: 'bold' }}
+        style={{
+          width: "100%",
+          textAlign: "left",
+          padding: 12,
+          fontWeight: "bold",
+        }}
       >
         {title}
       </button>
@@ -1385,33 +1508,37 @@ export default Accordion;
 ## 22. useActionState (React 19)
 
 ```jsx
-import { useActionState } from 'react';
+import { useActionState } from "react";
 
 async function submitForm(prevState, formData) {
-  const name = formData.get('name');
-  const res = await fetch('/api/users', {
-    method: 'POST',
+  const name = formData.get("name");
+  const res = await fetch("/api/users", {
+    method: "POST",
     body: JSON.stringify({ name }),
-    headers: { 'Content-Type': 'application/json' },
+    headers: { "Content-Type": "application/json" },
   });
 
   if (!res.ok) {
-    return { error: 'Failed to create user' };
+    return { error: "Failed to create user" };
   }
   return { success: true, name };
 }
 
 export default function AddUserForm() {
-  const [state, formAction, pending] = useActionState(submitForm, { error: null });
+  const [state, formAction, pending] = useActionState(submitForm, {
+    error: null,
+  });
 
   return (
     <form action={formAction}>
       <input name="name" type="text" required />
       <button type="submit" disabled={pending}>
-        {pending ? 'Creating...' : 'Add User'}
+        {pending ? "Creating..." : "Add User"}
       </button>
-      {state?.error && <p style={{ color: 'red' }}>{state.error}</p>}
-      {state?.success && <p style={{ color: 'green' }}>User {state.name} created!</p>}
+      {state?.error && <p style={{ color: "red" }}>{state.error}</p>}
+      {state?.success && (
+        <p style={{ color: "green" }}>User {state.name} created!</p>
+      )}
     </form>
   );
 }
@@ -1422,10 +1549,10 @@ export default function AddUserForm() {
 ## 23. useOptimistic (React 19)
 
 ```jsx
-import { useState, useOptimistic, useRef } from 'react';
+import { useState, useOptimistic, useRef } from "react";
 
 async function sendMessage(prevMessages, formData) {
-  const message = formData.get('message');
+  const message = formData.get("message");
   return message;
 }
 
@@ -1433,19 +1560,19 @@ export default function MessageList() {
   const [messages, setMessages] = useState([]);
   const [optimisticMessages, addOptimistic] = useOptimistic(
     messages,
-    (state, newMessage) => [...state, { text: newMessage, sending: true }]
+    (state, newMessage) => [...state, { text: newMessage, sending: true }],
   );
 
   const formRef = useRef(null);
 
   const formAction = async (formData) => {
-    const message = formData.get('message');
+    const message = formData.get("message");
     addOptimistic(message);
     formRef.current?.reset();
 
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setMessages(prev => [...prev, { text: message, sending: false }]);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setMessages((prev) => [...prev, { text: message, sending: false }]);
   };
 
   return (
@@ -1453,7 +1580,7 @@ export default function MessageList() {
       <ul>
         {optimisticMessages.map((msg, i) => (
           <li key={i} style={{ opacity: msg.sending ? 0.5 : 1 }}>
-            {msg.text} {msg.sending && '(sending...)'}
+            {msg.text} {msg.sending && "(sending...)"}
           </li>
         ))}
       </ul>
@@ -1469,10 +1596,10 @@ export default function MessageList() {
 ## 24. useTransition
 
 ```jsx
-import { useState, useTransition } from 'react';
+import { useState, useTransition } from "react";
 
 export default function SearchPage() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [isPending, startTransition] = useTransition();
 
@@ -1491,7 +1618,11 @@ export default function SearchPage() {
     <div>
       <input value={query} onChange={handleChange} placeholder="Search..." />
       {isPending && <div>Updating results...</div>}
-      <ul>{results.map(r => <li key={r.id}>{r.name}</li>)}</ul>
+      <ul>
+        {results.map((r) => (
+          <li key={r.id}>{r.name}</li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -1502,12 +1633,12 @@ export default function SearchPage() {
 ## 25. Testing (React Testing Library)
 
 ```jsx
-import { render, screen, fireEvent } from '@testing-library/react';
-import Counter from './Counter';
+import { render, screen, fireEvent } from "@testing-library/react";
+import Counter from "./Counter";
 
-test('increments count when button is clicked', () => {
+test("increments count when button is clicked", () => {
   render(<Counter />);
-  const button = screen.getByText('+1');
+  const button = screen.getByText("+1");
   fireEvent.click(button);
   expect(screen.getByText(/count: 1/i)).toBeInTheDocument();
 });
@@ -1515,4 +1646,4 @@ test('increments count when button is clicked', () => {
 
 ---
 
-*These snippets target modern React (18/19) with functional components and hooks. Adjust import paths and API endpoints to match your project setup.*
+_These snippets target modern React (18/19) with functional components and hooks. Adjust import paths and API endpoints to match your project setup._

@@ -1393,4 +1393,4 @@ urlpatterns = [
 
 ---
 
-*These patterns follow a layered architecture: **routers/views** handle HTTP, **services** contain business logic, **selectors** handle queries, and **models** handle persistence. Split settings by environment, use a custom user model from day one, and keep side effects behind `transaction.on_commit`.*
+_These patterns follow a layered architecture: **routers/views** handle HTTP, **services** contain business logic, **selectors** handle queries, and **models** handle persistence. Split settings by environment, use a custom user model from day one, and keep side effects behind `transaction.on_commit`._

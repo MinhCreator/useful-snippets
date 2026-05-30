@@ -6,17 +6,17 @@
 
 ## 1. App Router File Conventions
 
-| File | Purpose | Component Type |
-|------|---------|---------------|
-| `page.tsx` | Route UI | Server by default |
-| `layout.tsx` | Shared UI (persists across navigation) | Server by default |
-| `template.tsx` | Shared UI (re-mounts on navigation) | Server by default |
-| `loading.tsx` | Loading/Skeleton UI (Suspense boundary) | Server by default |
-| `error.tsx` | Error boundary | **Must be Client** |
-| `not-found.tsx` | 404 page | Server by default |
-| `route.ts` | API endpoint (Route Handler) | Server |
-| `global-error.tsx` | Root error boundary | **Must be Client** |
-| `middleware.ts` | Request interception (project root) | Server (Edge/Node) |
+| File               | Purpose                                 | Component Type     |
+| ------------------ | --------------------------------------- | ------------------ |
+| `page.tsx`         | Route UI                                | Server by default  |
+| `layout.tsx`       | Shared UI (persists across navigation)  | Server by default  |
+| `template.tsx`     | Shared UI (re-mounts on navigation)     | Server by default  |
+| `loading.tsx`      | Loading/Skeleton UI (Suspense boundary) | Server by default  |
+| `error.tsx`        | Error boundary                          | **Must be Client** |
+| `not-found.tsx`    | 404 page                                | Server by default  |
+| `route.ts`         | API endpoint (Route Handler)            | Server             |
+| `global-error.tsx` | Root error boundary                     | **Must be Client** |
+| `middleware.ts`    | Request interception (project root)     | Server (Edge/Node) |
 
 ---
 
@@ -27,7 +27,7 @@
 ```tsx
 // app/products/page.tsx — Server Component by default (no 'use client')
 export default async function ProductsPage() {
-  const products = await fetch('https://api.example.com/products', {
+  const products = await fetch("https://api.example.com/products", {
     next: { revalidate: 3600 }, // ISR: revalidate every hour
   }).then((res) => res.json());
 
@@ -45,13 +45,13 @@ export default async function ProductsPage() {
 
 ```tsx
 // app/dashboard/page.tsx
-import { db } from '@/lib/db';
+import { db } from "@/lib/db";
 
 export default async function DashboardPage() {
   const userCount = await db.user.count();
   const recentOrders = await db.order.findMany({
     take: 5,
-    orderBy: { createdAt: 'desc' },
+    orderBy: { createdAt: "desc" },
   });
 
   return (
@@ -75,9 +75,9 @@ export default async function DashboardPage() {
 export default async function DashboardPage() {
   // Fire all requests in parallel (no waterfall)
   const [user, posts, analytics] = await Promise.all([
-    fetch('/api/user').then((r) => r.json()),
-    fetch('/api/posts').then((r) => r.json()),
-    fetch('/api/analytics').then((r) => r.json()),
+    fetch("/api/user").then((r) => r.json()),
+    fetch("/api/posts").then((r) => r.json()),
+    fetch("/api/analytics").then((r) => r.json()),
   ]);
 
   return (
@@ -97,9 +97,9 @@ export default async function DashboardPage() {
 ### Basic Client Component
 
 ```tsx
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Counter() {
   const [count, setCount] = useState(0);
@@ -116,17 +116,17 @@ export default function Counter() {
 ### Client Component with Browser API
 
 ```tsx
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function WindowSize() {
   const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const handle = () => setWidth(window.innerWidth);
-    window.addEventListener('resize', handle);
-    return () => window.removeEventListener('resize', handle);
+    window.addEventListener("resize", handle);
+    return () => window.removeEventListener("resize", handle);
   }, []);
 
   return <div>Window width: {width}px</div>;
@@ -136,13 +136,13 @@ export default function WindowSize() {
 ### Client Component with Event Handler
 
 ```tsx
-'use client';
+"use client";
 
 export default function SearchInput({ onSearch }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    onSearch(formData.get('query'));
+    onSearch(formData.get("query"));
   };
 
   return (
@@ -162,10 +162,12 @@ export default function SearchInput({ onSearch }) {
 
 ```tsx
 // app/products/page.tsx — Server Component
-import ProductCard from './ProductCard'; // Client Component
+import ProductCard from "./ProductCard"; // Client Component
 
 export default async function ProductsPage() {
-  const products = await fetch('https://api.example.com/products').then((r) => r.json());
+  const products = await fetch("https://api.example.com/products").then((r) =>
+    r.json(),
+  );
 
   return (
     <div>
@@ -179,9 +181,9 @@ export default async function ProductsPage() {
 
 ```tsx
 // app/products/ProductCard.tsx — Client Component
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function ProductCard({ product }) {
   const [liked, setLiked] = useState(false);
@@ -191,7 +193,7 @@ export default function ProductCard({ product }) {
       <h3>{product.name}</h3>
       <p>{product.price}</p>
       <button onClick={() => setLiked(!liked)}>
-        {liked ? 'Unlike' : 'Like'}
+        {liked ? "Unlike" : "Like"}
       </button>
     </div>
   );
@@ -202,8 +204,8 @@ export default function ProductCard({ product }) {
 
 ```tsx
 // app/layout.tsx — Server Component
-import Sidebar from './Sidebar'; // Client Component
-import NavLinks from './NavLinks'; // Server Component
+import Sidebar from "./Sidebar"; // Client Component
+import NavLinks from "./NavLinks"; // Server Component
 
 export default function Layout({ children }) {
   return (
@@ -219,7 +221,7 @@ export default function Layout({ children }) {
 
 ```tsx
 // Sidebar.tsx — Client Component
-'use client';
+"use client";
 
 export default function Sidebar({ children }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -237,18 +239,14 @@ export default function Sidebar({ children }) {
 
 ```tsx
 // app/providers.tsx — Client Component
-'use client';
+"use client";
 
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from "react";
 
-const ThemeContext = createContext('light');
+const ThemeContext = createContext("light");
 
 export function ThemeProvider({ children }) {
-  return (
-    <ThemeContext.Provider value="dark">
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value="dark">{children}</ThemeContext.Provider>;
 }
 
 export function useTheme() {
@@ -258,7 +256,7 @@ export function useTheme() {
 
 ```tsx
 // app/layout.tsx — Server Component
-import { ThemeProvider } from './providers';
+import { ThemeProvider } from "./providers";
 
 export default function RootLayout({ children }) {
   return (
@@ -279,11 +277,11 @@ export default function RootLayout({ children }) {
 
 ```tsx
 // app/layout.tsx
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'My App',
-  description: 'My Next.js application',
+  title: "My App",
+  description: "My Next.js application",
 };
 
 export default function RootLayout({ children }) {
@@ -305,7 +303,7 @@ export default function RootLayout({ children }) {
 // app/dashboard/layout.tsx
 export default function DashboardLayout({ children }) {
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: "flex" }}>
       <nav style={{ width: 240 }}>
         <h2>Dashboard</h2>
         <a href="/dashboard">Overview</a>
@@ -334,7 +332,7 @@ export default function MarketingLayout({ children }) {
 // app/(dashboard)/layout.tsx — isolated layout for dashboard pages
 export default function DashboardLayout({ children }) {
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: "flex" }}>
       <DashboardSidebar />
       <main>{children}</main>
     </div>
@@ -353,7 +351,9 @@ export default function DashboardLayout({ children }) {
 export default async function ProductPage({ params }) {
   const { slug } = await params; // params is a Promise in Next.js 15
 
-  const product = await fetch(`https://api.example.com/products/${slug}`).then((r) => r.json());
+  const product = await fetch(`https://api.example.com/products/${slug}`).then(
+    (r) => r.json(),
+  );
 
   return (
     <div>
@@ -369,7 +369,9 @@ export default async function ProductPage({ params }) {
 ```tsx
 // app/products/[slug]/page.tsx
 export async function generateStaticParams() {
-  const products = await fetch('https://api.example.com/products').then((r) => r.json());
+  const products = await fetch("https://api.example.com/products").then((r) =>
+    r.json(),
+  );
 
   return products.map((product) => ({
     slug: product.slug,
@@ -385,7 +387,7 @@ export default async function DocPage({ params }) {
   const { slug } = await params;
   // slug is an array like ['getting-started', 'installation']
 
-  return <div>Docs: {slug.join(' / ')}</div>;
+  return <div>Docs: {slug.join(" / ")}</div>;
 }
 ```
 
@@ -397,7 +399,7 @@ export default async function BlogPage({ params }) {
   const { slug } = await params;
   const segments = slug || [];
 
-  return <div>Blog: {segments.join(' / ') || 'Home'}</div>;
+  return <div>Blog: {segments.join(" / ") || "Home"}</div>;
 }
 ```
 
@@ -407,11 +409,13 @@ export default async function BlogPage({ params }) {
 
 ```tsx
 // app/products/[slug]/page.tsx
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const { slug } = await params;
-  const product = await fetch(`https://api.example.com/products/${slug}`).then((r) => r.json());
+  const product = await fetch(`https://api.example.com/products/${slug}`).then(
+    (r) => r.json(),
+  );
 
   return {
     title: product.name,
@@ -437,12 +441,22 @@ export default async function ProductPage({ params }) {
 // app/products/loading.tsx
 export default function Loading() {
   return (
-    <div style={{ display: 'grid', gap: 16 }}>
+    <div style={{ display: "grid", gap: 16 }}>
       {[1, 2, 3, 4].map((i) => (
-        <div key={i} style={{ height: 100, background: '#e0e0e0', borderRadius: 8 }}>
+        <div
+          key={i}
+          style={{ height: 100, background: "#e0e0e0", borderRadius: 8 }}
+        >
           <div style={{ padding: 16, opacity: 0.5 }}>
-            <div style={{ height: 20, width: '60%', background: '#ccc', marginBottom: 8 }} />
-            <div style={{ height: 16, width: '40%', background: '#ddd' }} />
+            <div
+              style={{
+                height: 20,
+                width: "60%",
+                background: "#ccc",
+                marginBottom: 8,
+              }}
+            />
+            <div style={{ height: 16, width: "40%", background: "#ddd" }} />
           </div>
         </div>
       ))}
@@ -455,13 +469,13 @@ export default function Loading() {
 
 ```tsx
 // app/products/error.tsx
-'use client';
+"use client";
 
 export default function Error({ error, reset }) {
   return (
-    <div style={{ textAlign: 'center', padding: 48 }}>
+    <div style={{ textAlign: "center", padding: 48 }}>
       <h2>Something went wrong!</h2>
-      <p style={{ color: '#666' }}>{error.message}</p>
+      <p style={{ color: "#666" }}>{error.message}</p>
       <button onClick={reset}>Try again</button>
     </div>
   );
@@ -472,7 +486,7 @@ export default function Error({ error, reset }) {
 
 ```tsx
 // app/dashboard/page.tsx
-import { Suspense } from 'react';
+import { Suspense } from "react";
 
 export default function DashboardPage() {
   return (
@@ -492,12 +506,18 @@ export default function DashboardPage() {
 }
 
 async function Posts() {
-  const posts = await fetch('/api/posts').then((r) => r.json());
-  return <ul>{posts.map((p) => <li key={p.id}>{p.title}</li>)}</ul>;
+  const posts = await fetch("/api/posts").then((r) => r.json());
+  return (
+    <ul>
+      {posts.map((p) => (
+        <li key={p.id}>{p.title}</li>
+      ))}
+    </ul>
+  );
 }
 
 async function Analytics() {
-  const data = await fetch('/api/analytics').then((r) => r.json());
+  const data = await fetch("/api/analytics").then((r) => r.json());
   return <div>Views: {data.views}</div>;
 }
 ```
@@ -508,7 +528,7 @@ async function Analytics() {
 // app/not-found.tsx
 export default function NotFound() {
   return (
-    <div style={{ textAlign: 'center', padding: 64 }}>
+    <div style={{ textAlign: "center", padding: 64 }}>
       <h1>404 — Page Not Found</h1>
       <p>The page you're looking for doesn't exist.</p>
       <a href="/">Go home</a>
@@ -525,7 +545,7 @@ export default function NotFound() {
 
 ```tsx
 // app/api/users/route.ts
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 export async function GET() {
   const users = await db.user.findMany();
@@ -537,7 +557,7 @@ export async function GET() {
 
 ```tsx
 // app/api/users/route.ts
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
@@ -545,8 +565,8 @@ export async function POST(request: NextRequest) {
   // Validate
   if (!body.email || !body.name) {
     return NextResponse.json(
-      { error: 'Email and name are required' },
-      { status: 400 }
+      { error: "Email and name are required" },
+      { status: 400 },
     );
   }
 
@@ -559,14 +579,14 @@ export async function POST(request: NextRequest) {
 
 ```tsx
 // app/api/users/[id]/route.ts
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest, { params }) {
   const { id } = await params;
 
   const user = await db.user.findUnique({ where: { id } });
   if (!user) {
-    return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
   return NextResponse.json({ success: true, data: user });
@@ -592,15 +612,15 @@ export async function DELETE(request: NextRequest, { params }) {
 
 ```tsx
 // app/api/posts/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const body = await request.json();
@@ -616,13 +636,13 @@ export async function POST(request: NextRequest) {
 
 ```tsx
 // app/api/products/route.ts
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const page = parseInt(searchParams.get('page') || '1');
-  const limit = parseInt(searchParams.get('limit') || '10');
-  const category = searchParams.get('category');
+  const page = parseInt(searchParams.get("page") || "1");
+  const limit = parseInt(searchParams.get("limit") || "10");
+  const category = searchParams.get("category");
 
   const where = category ? { category } : {};
   const [data, total] = await Promise.all([
@@ -650,28 +670,28 @@ export async function GET(request: NextRequest) {
 
 ```tsx
 // app/actions.ts
-'use server';
+"use server";
 
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
-import { db } from '@/lib/db';
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { db } from "@/lib/db";
 
 export async function createPost(formData: FormData) {
-  const title = formData.get('title');
-  const content = formData.get('content');
+  const title = formData.get("title");
+  const content = formData.get("content");
 
   await db.post.create({
     data: { title, content },
   });
 
-  revalidatePath('/blog');
-  redirect('/blog');
+  revalidatePath("/blog");
+  redirect("/blog");
 }
 ```
 
 ```tsx
 // app/blog/new/page.tsx
-import { createPost } from '@/app/actions';
+import { createPost } from "@/app/actions";
 
 export default function NewPostPage() {
   return (
@@ -688,12 +708,12 @@ export default function NewPostPage() {
 
 ```tsx
 // app/actions.ts
-'use server';
+"use server";
 
-import { z } from 'zod';
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
-import { db } from '@/lib/db';
+import { z } from "zod";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { db } from "@/lib/db";
 
 const PostSchema = z.object({
   title: z.string().min(3).max(100),
@@ -702,8 +722,8 @@ const PostSchema = z.object({
 
 export async function createPost(formData: FormData) {
   const parsed = PostSchema.safeParse({
-    title: formData.get('title'),
-    content: formData.get('content'),
+    title: formData.get("title"),
+    content: formData.get("content"),
   });
 
   if (!parsed.success) {
@@ -712,8 +732,8 @@ export async function createPost(formData: FormData) {
 
   await db.post.create({ data: parsed.data });
 
-  revalidatePath('/blog');
-  redirect('/blog');
+  revalidatePath("/blog");
+  redirect("/blog");
 }
 ```
 
@@ -721,32 +741,32 @@ export async function createPost(formData: FormData) {
 
 ```tsx
 // app/actions.ts
-'use server';
+"use server";
 
-import { revalidatePath } from 'next/cache';
-import { db } from '@/lib/db';
+import { revalidatePath } from "next/cache";
+import { db } from "@/lib/db";
 
 export async function createPost(prevState, formData) {
-  const title = formData.get('title');
-  const content = formData.get('content');
+  const title = formData.get("title");
+  const content = formData.get("content");
 
   if (!title || title.length < 3) {
-    return { error: 'Title must be at least 3 characters' };
+    return { error: "Title must be at least 3 characters" };
   }
 
   await db.post.create({ data: { title, content } });
 
-  revalidatePath('/blog');
+  revalidatePath("/blog");
   return { success: true };
 }
 ```
 
 ```tsx
 // app/blog/new/page.tsx
-'use client';
+"use client";
 
-import { useActionState } from 'react';
-import { createPost } from '@/app/actions';
+import { useActionState } from "react";
+import { createPost } from "@/app/actions";
 
 export default function NewPostForm() {
   const [state, formAction, pending] = useActionState(createPost, null);
@@ -756,10 +776,10 @@ export default function NewPostForm() {
       <input name="title" placeholder="Title" required />
       <textarea name="content" placeholder="Content" required />
       <button type="submit" disabled={pending}>
-        {pending ? 'Creating...' : 'Create Post'}
+        {pending ? "Creating..." : "Create Post"}
       </button>
-      {state?.error && <p style={{ color: 'red' }}>{state.error}</p>}
-      {state?.success && <p style={{ color: 'green' }}>Post created!</p>}
+      {state?.error && <p style={{ color: "red" }}>{state.error}</p>}
+      {state?.success && <p style={{ color: "green" }}>Post created!</p>}
     </form>
   );
 }
@@ -769,9 +789,9 @@ export default function NewPostForm() {
 
 ```tsx
 // app/actions.ts
-'use server';
+"use server";
 
-import { revalidatePath } from 'next/cache';
+import { revalidatePath } from "next/cache";
 
 export async function toggleLike(postId, userId) {
   const existing = await db.like.findUnique({
@@ -790,9 +810,9 @@ export async function toggleLike(postId, userId) {
 
 ```tsx
 // app/components/LikeButton.tsx
-'use client';
+"use client";
 
-import { toggleLike } from '@/app/actions';
+import { toggleLike } from "@/app/actions";
 
 export default function LikeButton({ postId, userId, initialLiked }) {
   const [liked, setLiked] = useState(initialLiked);
@@ -802,11 +822,7 @@ export default function LikeButton({ postId, userId, initialLiked }) {
     await toggleLike(postId, userId);
   };
 
-  return (
-    <button onClick={handleClick}>
-      {liked ? 'Unlike' : 'Like'}
-    </button>
-  );
+  return <button onClick={handleClick}>{liked ? "Unlike" : "Like"}</button>;
 }
 ```
 
@@ -814,21 +830,21 @@ export default function LikeButton({ postId, userId, initialLiked }) {
 
 ```tsx
 // app/components/MessageList.tsx
-'use client';
+"use client";
 
-import { useOptimistic, useRef } from 'react';
-import { sendMessage } from '@/app/actions';
+import { useOptimistic, useRef } from "react";
+import { sendMessage } from "@/app/actions";
 
 export default function MessageList({ messages }) {
   const [optimisticMessages, addOptimistic] = useOptimistic(
     messages,
-    (state, newMessage) => [...state, { text: newMessage, sending: true }]
+    (state, newMessage) => [...state, { text: newMessage, sending: true }],
   );
 
   const formRef = useRef(null);
 
   const formAction = async (formData) => {
-    const message = formData.get('message');
+    const message = formData.get("message");
     addOptimistic(message);
     formRef.current?.reset();
     await sendMessage(formData);
@@ -839,7 +855,7 @@ export default function MessageList({ messages }) {
       <ul>
         {optimisticMessages.map((msg, i) => (
           <li key={i} style={{ opacity: msg.sending ? 0.5 : 1 }}>
-            {msg.text} {msg.sending && '(sending...)'}
+            {msg.text} {msg.sending && "(sending...)"}
           </li>
         ))}
       </ul>
@@ -854,22 +870,22 @@ export default function MessageList({ messages }) {
 
 ```tsx
 // app/actions.ts
-'use server';
+"use server";
 
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import { revalidatePath } from 'next/cache';
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { revalidatePath } from "next/cache";
 
 export async function deletePost(postId) {
   const session = await getServerSession(authOptions);
-  if (!session) throw new Error('Unauthenticated');
+  if (!session) throw new Error("Unauthenticated");
 
   const post = await db.post.findUnique({ where: { id: postId } });
-  if (!post) throw new Error('Post not found');
-  if (post.authorId !== session.user.id) throw new Error('Forbidden');
+  if (!post) throw new Error("Post not found");
+  if (post.authorId !== session.user.id) throw new Error("Forbidden");
 
   await db.post.delete({ where: { id: postId } });
-  revalidatePath('/dashboard');
+  revalidatePath("/dashboard");
 }
 ```
 
@@ -881,23 +897,23 @@ export async function deletePost(postId) {
 
 ```tsx
 // middleware.ts
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 export function middleware(request) {
   const { pathname } = request.nextUrl;
-  const token = request.cookies.get('session')?.value;
+  const token = request.cookies.get("session")?.value;
 
   // Public paths — no auth needed
-  const publicPaths = ['/login', '/signup', '/', '/api/auth'];
+  const publicPaths = ["/login", "/signup", "/", "/api/auth"];
   if (publicPaths.some((p) => pathname.startsWith(p))) {
     return NextResponse.next();
   }
 
   // Redirect to login if not authenticated
   if (!token) {
-    const loginUrl = new URL('/login', request.url);
-    loginUrl.searchParams.set('callbackUrl', pathname);
+    const loginUrl = new URL("/login", request.url);
+    loginUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(loginUrl);
   }
 
@@ -905,7 +921,7 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };
 ```
 
@@ -913,47 +929,47 @@ export const config = {
 
 ```tsx
 // middleware.ts
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import { jwtVerify } from 'jose';
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { jwtVerify } from "jose";
 
 export async function middleware(request) {
   const { pathname } = request.nextUrl;
-  const token = request.cookies.get('session')?.value;
+  const token = request.cookies.get("session")?.value;
 
-  const publicPaths = ['/login', '/signup', '/'];
+  const publicPaths = ["/login", "/signup", "/"];
   if (publicPaths.some((p) => pathname.startsWith(p))) {
     return NextResponse.next();
   }
 
   if (!token) {
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
   try {
     const { payload } = await jwtVerify(
       token,
-      new TextEncoder().encode(process.env.JWT_SECRET)
+      new TextEncoder().encode(process.env.JWT_SECRET),
     );
     const role = payload.role;
 
     // Role-based redirects
-    if (pathname.startsWith('/admin') && role !== 'admin') {
-      return NextResponse.redirect(new URL('/unauthorized', request.url));
+    if (pathname.startsWith("/admin") && role !== "admin") {
+      return NextResponse.redirect(new URL("/unauthorized", request.url));
     }
 
     // Pass role to Server Components via header
     const headers = new Headers(request.headers);
-    headers.set('x-user-role', role);
+    headers.set("x-user-role", role);
 
     return NextResponse.next({ request: { headers } });
   } catch {
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
 ```
 
@@ -961,22 +977,22 @@ export const config = {
 
 ```tsx
 // middleware.ts
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 export function middleware(request) {
   const { pathname, searchParams } = request.nextUrl;
 
   // Redirect old URLs
-  if (pathname.startsWith('/old-blog')) {
-    return NextResponse.redirect(new URL('/blog', request.url));
+  if (pathname.startsWith("/old-blog")) {
+    return NextResponse.redirect(new URL("/blog", request.url));
   }
 
   // Set security headers
   const response = NextResponse.next();
-  response.headers.set('X-Frame-Options', 'DENY');
-  response.headers.set('X-Content-Type-Options', 'nosniff');
-  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  response.headers.set("X-Frame-Options", "DENY");
+  response.headers.set("X-Content-Type-Options", "nosniff");
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
 
   return response;
 }
@@ -992,23 +1008,23 @@ export function middleware(request) {
 // Next.js 15: fetch is NOT cached by default — opt in explicitly
 
 // Static data (cached until redeploy)
-const data = await fetch('https://api.example.com/data', {
-  cache: 'force-cache',
+const data = await fetch("https://api.example.com/data", {
+  cache: "force-cache",
 });
 
 // Revalidate every 60 seconds (ISR)
-const data = await fetch('https://api.example.com/data', {
+const data = await fetch("https://api.example.com/data", {
   next: { revalidate: 60 },
 });
 
 // Dynamic data (no cache)
-const data = await fetch('https://api.example.com/data', {
-  cache: 'no-store',
+const data = await fetch("https://api.example.com/data", {
+  cache: "no-store",
 });
 
 // On-demand revalidation with tags
-const data = await fetch('https://api.example.com/data', {
-  next: { tags: ['products'] },
+const data = await fetch("https://api.example.com/data", {
+  next: { tags: ["products"] },
 });
 // Later: revalidateTag('products') in a Server Action
 ```
@@ -1021,14 +1037,14 @@ export default async function ProductsPage() {
   let products;
 
   try {
-    const res = await fetch('https://api.example.com/products', {
+    const res = await fetch("https://api.example.com/products", {
       next: { revalidate: 3600 },
     });
-    if (!res.ok) throw new Error('Failed to fetch');
+    if (!res.ok) throw new Error("Failed to fetch");
     products = await res.json();
   } catch (error) {
     // Will be caught by the nearest error.tsx boundary
-    throw new Error('Failed to load products. Please try again.');
+    throw new Error("Failed to load products. Please try again.");
   }
 
   return (
@@ -1044,18 +1060,18 @@ export default async function ProductsPage() {
 ### Revalidate on Demand (after mutation)
 
 ```tsx
-'use server';
+"use server";
 
-import { revalidatePath, revalidateTag } from 'next/cache';
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function updateProduct(formData) {
   // ... update DB
 
   // Revalidate a specific path
-  revalidatePath('/products');
+  revalidatePath("/products");
 
   // Or revalidate by tag (for fetch with next: { tags: ['products'] })
-  revalidateTag('products');
+  revalidateTag("products");
 }
 ```
 
@@ -1064,7 +1080,7 @@ export async function updateProduct(formData) {
 ```tsx
 // app/posts/page.tsx — Server Component (initial data)
 export default async function PostsPage() {
-  const initialPosts = await fetch('/api/posts?page=1').then((r) => r.json());
+  const initialPosts = await fetch("/api/posts?page=1").then((r) => r.json());
 
   return <PostListWithLoadMore initialPosts={initialPosts} />;
 }
@@ -1072,9 +1088,9 @@ export default async function PostsPage() {
 
 ```tsx
 // app/posts/PostListWithLoadMore.tsx — Client Component
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function PostListWithLoadMore({ initialPosts }) {
   const [posts, setPosts] = useState(initialPosts.data);
@@ -1085,7 +1101,9 @@ export default function PostListWithLoadMore({ initialPosts }) {
   const loadMore = async () => {
     setLoading(true);
     const nextPage = page + 1;
-    const res = await fetch(`/api/posts?page=${nextPage}`).then((r) => r.json());
+    const res = await fetch(`/api/posts?page=${nextPage}`).then((r) =>
+      r.json(),
+    );
     setPosts((prev) => [...prev, ...res.data]);
     setPage(nextPage);
     setHasMore(res.meta.hasNext);
@@ -1094,10 +1112,12 @@ export default function PostListWithLoadMore({ initialPosts }) {
 
   return (
     <div>
-      {posts.map((post) => <div key={post.id}>{post.title}</div>)}
+      {posts.map((post) => (
+        <div key={post.id}>{post.title}</div>
+      ))}
       {hasMore && (
         <button onClick={loadMore} disabled={loading}>
-          {loading ? 'Loading...' : 'Load more'}
+          {loading ? "Loading..." : "Load more"}
         </button>
       )}
     </div>
@@ -1113,15 +1133,15 @@ export default function PostListWithLoadMore({ initialPosts }) {
 
 ```tsx
 // app/dashboard/page.tsx
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import { redirect } from 'next/navigation';
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect('/login');
+    redirect("/login");
   }
 
   return (
@@ -1135,22 +1155,22 @@ export default async function DashboardPage() {
 ### Auth in Server Action
 
 ```tsx
-'use server';
+"use server";
 
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import { revalidatePath } from 'next/cache';
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { revalidatePath } from "next/cache";
 
 export async function updateProfile(formData) {
   const session = await getServerSession(authOptions);
-  if (!session) throw new Error('Unauthorized');
+  if (!session) throw new Error("Unauthorized");
 
   await db.user.update({
     where: { email: session.user.email },
-    data: { name: formData.get('name') },
+    data: { name: formData.get("name") },
   });
 
-  revalidatePath('/dashboard');
+  revalidatePath("/dashboard");
 }
 ```
 
@@ -1158,15 +1178,15 @@ export async function updateProfile(formData) {
 
 ```tsx
 // app/api/profile/route.ts
-import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const user = await db.user.findUnique({
@@ -1184,10 +1204,12 @@ export async function GET() {
 
 ```tsx
 // Lazy-load a heavy client component
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-const HeavyChart = dynamic(() => import('@/components/HeavyChart'), {
-  loading: () => <div style={{ height: 400, background: '#f0f0f0' }}>Loading chart...</div>,
+const HeavyChart = dynamic(() => import("@/components/HeavyChart"), {
+  loading: () => (
+    <div style={{ height: 400, background: "#f0f0f0" }}>Loading chart...</div>
+  ),
   ssr: false, // Skip SSR if it uses browser APIs
 });
 
@@ -1205,8 +1227,8 @@ export default function Dashboard() {
 
 ```tsx
 const MarkdownEditor = dynamic(
-  () => import('@/components/Editor').then((mod) => mod.MarkdownEditor),
-  { loading: () => <div>Loading editor...</div> }
+  () => import("@/components/Editor").then((mod) => mod.MarkdownEditor),
+  { loading: () => <div>Loading editor...</div> },
 );
 ```
 
@@ -1218,12 +1240,12 @@ const MarkdownEditor = dynamic(
 // app/products/page.tsx — read search params
 export default async function ProductsPage({ searchParams }) {
   const { q, page, sort } = await searchParams;
-  const currentPage = parseInt(page || '1');
-  const currentSort = sort || 'name';
+  const currentPage = parseInt(page || "1");
+  const currentSort = sort || "name";
 
   const products = await db.product.findMany({
     where: q ? { name: { contains: q } } : {},
-    orderBy: { [currentSort]: 'asc' },
+    orderBy: { [currentSort]: "asc" },
     skip: (currentPage - 1) * 20,
     take: 20,
   });
@@ -1235,9 +1257,9 @@ export default async function ProductsPage({ searchParams }) {
 ### Client-Side Search Params (useSearchParams)
 
 ```tsx
-'use client';
+"use client";
 
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 export default function SearchBar() {
   const searchParams = useSearchParams();
@@ -1247,17 +1269,17 @@ export default function SearchBar() {
   const handleSearch = (term) => {
     const params = new URLSearchParams(searchParams);
     if (term) {
-      params.set('q', term);
+      params.set("q", term);
     } else {
-      params.delete('q');
+      params.delete("q");
     }
-    params.set('page', '1');
+    params.set("page", "1");
     router.replace(`${pathname}?${params.toString()}`);
   };
 
   return (
     <input
-      defaultValue={searchParams.get('q') || ''}
+      defaultValue={searchParams.get("q") || ""}
       onChange={(e) => handleSearch(e.target.value)}
       placeholder="Search..."
     />
@@ -1271,11 +1293,15 @@ export default function SearchBar() {
 
 ```tsx
 // app/dashboard/layout.tsx
-export default function DashboardLayout({ children, analytics, notifications }) {
+export default function DashboardLayout({
+  children,
+  analytics,
+  notifications,
+}) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 24 }}>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 300px", gap: 24 }}>
       <main>{children}</main>
-      <aside style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <aside style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         {analytics}
         {notifications}
       </aside>
@@ -1287,7 +1313,7 @@ export default function DashboardLayout({ children, analytics, notifications }) 
 ```tsx
 // app/dashboard/@analytics/page.tsx
 export default async function Analytics() {
-  const data = await fetch('/api/analytics').then((r) => r.json());
+  const data = await fetch("/api/analytics").then((r) => r.json());
   return <div>Views: {data.views}</div>;
 }
 ```
@@ -1295,10 +1321,12 @@ export default async function Analytics() {
 ```tsx
 // app/dashboard/@notifications/page.tsx
 export default async function Notifications() {
-  const notifs = await fetch('/api/notifications').then((r) => r.json());
+  const notifs = await fetch("/api/notifications").then((r) => r.json());
   return (
     <ul>
-      {notifs.map((n) => <li key={n.id}>{n.text}</li>)}
+      {notifs.map((n) => (
+        <li key={n.id}>{n.text}</li>
+      ))}
     </ul>
   );
 }
@@ -1340,19 +1368,30 @@ export default function RootLayout({ children, modal }) {
 
 ```tsx
 // app/@modal/(.)photo/[id]/page.tsx — intercepts /photo/123 for modal
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 export default function PhotoModal({ params }) {
   const router = useRouter();
 
   return (
     <div
-      style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "rgba(0,0,0,0.5)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 1000,
+      }}
       onClick={() => router.back()}
     >
-      <div style={{ background: '#fff', padding: 24, borderRadius: 8 }} onClick={(e) => e.stopPropagation()}>
+      <div
+        style={{ background: "#fff", padding: 24, borderRadius: 8 }}
+        onClick={(e) => e.stopPropagation()}
+      >
         <h2>Photo {params.id}</h2>
         <img src={`/photos/${params.id}`} alt="" />
       </div>
@@ -1384,7 +1423,9 @@ export default async function ProductPage({ params }) {
 
 // Pre-render the most popular products at build time
 export async function generateStaticParams() {
-  const products = await fetch('https://api.example.com/products?limit=10').then((r) => r.json());
+  const products = await fetch(
+    "https://api.example.com/products?limit=10",
+  ).then((r) => r.json());
   return products.map((p) => ({ slug: p.slug }));
 }
 ```
@@ -1401,11 +1442,11 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 // ✅ Private (server-only, never exposed to client)
 // DATABASE_URL=postgresql://...
 // Only accessible in Server Components, Route Handlers, Server Actions
-import { db } from '@/lib/db';
+import { db } from "@/lib/db";
 
 // ✅ Protect secrets with 'server-only' package
 // lib/secrets.ts
-import 'server-only';
+import "server-only";
 
 export const apiKey = process.env.INTERNAL_API_KEY;
 // If imported in a Client Component, this will fail at build time
@@ -1417,7 +1458,7 @@ export const apiKey = process.env.INTERNAL_API_KEY;
 
 ```tsx
 // app/api/events/route.ts
-import { NextRequest } from 'next/server';
+import { NextRequest } from "next/server";
 
 export async function GET(request) {
   const stream = new ReadableStream({
@@ -1429,7 +1470,7 @@ export async function GET(request) {
         controller.enqueue(`data: ${JSON.stringify({ time: Date.now() })}\n\n`);
       }, 1000);
 
-      request.signal.addEventListener('abort', () => {
+      request.signal.addEventListener("abort", () => {
         clearInterval(interval);
         controller.close();
       });
@@ -1438,9 +1479,9 @@ export async function GET(request) {
 
   return new Response(stream, {
     headers: {
-      'Content-Type': 'text/event-stream',
-      'Cache-Control': 'no-cache',
-      Connection: 'keep-alive',
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      Connection: "keep-alive",
     },
   });
 }
@@ -1452,35 +1493,35 @@ export async function GET(request) {
 
 ```tsx
 // __tests__/page.test.tsx
-import { render, screen } from '@testing-library/react';
-import Page from '@/app/page';
+import { render, screen } from "@testing-library/react";
+import Page from "@/app/page";
 
 // Mock fetch globally
 global.fetch = jest.fn(() =>
   Promise.resolve({
     ok: true,
-    json: () => Promise.resolve([{ id: 1, name: 'Test Product' }]),
-  })
+    json: () => Promise.resolve([{ id: 1, name: "Test Product" }]),
+  }),
 );
 
-describe('Products Page', () => {
-  it('renders products', async () => {
+describe("Products Page", () => {
+  it("renders products", async () => {
     const PageComponent = await Page();
     render(PageComponent);
 
-    expect(screen.getByText('Test Product')).toBeInTheDocument();
+    expect(screen.getByText("Test Product")).toBeInTheDocument();
   });
 });
 ```
 
 ```tsx
 // __tests__/api.test.ts
-import { GET } from '@/app/api/users/route';
-import { NextRequest } from 'next/server';
+import { GET } from "@/app/api/users/route";
+import { NextRequest } from "next/server";
 
-describe('GET /api/users', () => {
-  it('returns users list', async () => {
-    const request = new NextRequest(new URL('http://localhost/api/users'));
+describe("GET /api/users", () => {
+  it("returns users list", async () => {
+    const request = new NextRequest(new URL("http://localhost/api/users"));
     const response = await GET();
     const body = await response.json();
 
@@ -1495,7 +1536,7 @@ describe('GET /api/users', () => {
 ## 22. Image Optimization
 
 ```tsx
-import Image from 'next/image';
+import Image from "next/image";
 
 export default function ProductImage({ src, alt, priority = false }) {
   return (
@@ -1505,7 +1546,7 @@ export default function ProductImage({ src, alt, priority = false }) {
       width={800}
       height={600}
       priority={priority} // Use for above-the-fold images
-      placeholder="blur"   // Requires blurDataURL
+      placeholder="blur" // Requires blurDataURL
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
     />
   );
@@ -1519,22 +1560,22 @@ export default function ProductImage({ src, alt, priority = false }) {
 ### In Server Components
 
 ```tsx
-import { redirect } from 'next/navigation';
+import { redirect } from "next/navigation";
 
 export default async function OldPage() {
-  redirect('/new-page');
+  redirect("/new-page");
 }
 ```
 
 ### In Server Actions
 
 ```tsx
-'use server';
-import { redirect } from 'next/navigation';
+"use server";
+import { redirect } from "next/navigation";
 
 export async function submitForm(formData) {
   // ... save to DB
-  redirect('/success');
+  redirect("/success");
 }
 ```
 
@@ -1543,12 +1584,12 @@ export async function submitForm(formData) {
 ```tsx
 // middleware.ts
 export function middleware(request) {
-  if (request.nextUrl.pathname === '/old-page') {
-    return NextResponse.redirect(new URL('/new-page', request.url));
+  if (request.nextUrl.pathname === "/old-page") {
+    return NextResponse.redirect(new URL("/new-page", request.url));
   }
 }
 ```
 
 ---
 
-*These patterns target Next.js 15+ with the App Router. The key mental model: **Server Components** for data & layout, **Client Components** for interactivity, **Server Actions** for mutations, **Route Handlers** for external HTTP endpoints. Start on the server — add `'use client'` only where needed.*
+_These patterns target Next.js 15+ with the App Router. The key mental model: **Server Components** for data & layout, **Client Components** for interactivity, **Server Actions** for mutations, **Route Handlers** for external HTTP endpoints. Start on the server — add `'use client'` only where needed._

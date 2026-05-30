@@ -3,6 +3,8 @@
   "url": "https://github.com/MinhCreator/useful-snippets",
   "src": "docs",
   "out": "site",
+  "base": "/",
+  "favicon": "/assets/favicon.ico",
   "engine": "js",
   "layout": {
     "spa": true,
@@ -22,12 +24,12 @@
     },
     "footer": {
       "style": "minimal",
-      "content": "© 2026 MinhCreatorVN.",
+      "content": "© 2026 My Project.",
       "branding": true
     }
   },
   "theme": {
-    "name": "default",
+    "name": "sky",
     "appearance": "system",
     "codeHighlight": true
   },
@@ -37,13 +39,79 @@
   "pageNavigation": true,
   "navigation": [
     { "title": "Introduction", "path": "/", "icon": "home" },
-    
     {
       "title": "Snippets",
       "path": "/snippets",
       "icon": "code",
       "collapsible": true,
-      "children": []
+      "children": [
+        {
+          "title": "Django",
+          "path": "/snippets/django-snippet",
+          "icon": "braces",
+          "external": false
+        },
+        {
+          "title": "Expressjs",
+          "path": "/snippets/expressjs-snippet",
+          "icon": "braces",
+          "external": false
+        },
+        {
+          "title": "Fastapi",
+          "path": "/snippets/fastapi-snippet",
+          "icon": "braces",
+          "external": false
+        },
+        {
+          "title": "Java",
+          "path": "/snippets/java-snippet",
+          "icon": "braces",
+          "external": false
+        },
+        {
+          "title": "JS",
+          "path": "/snippets/javascript-snippet",
+          "icon": "braces",
+          "external": false
+        },
+        {
+          "title": "NextJS",
+          "path": "/snippets/nextjs-snippet",
+          "icon": "braces",
+          "external": false
+        },
+        {
+          "title": "Python",
+          "path": "/snippets/python-snippet",
+          "icon": "braces",
+          "external": false
+        },
+        {
+          "title": "ReactJS Cheatsheet",
+          "path": "/snippets/reactjs-cheatsheet",
+          "icon": "braces",
+          "external": false
+        },
+        {
+          "title": "ReacJS snip vscode extension",
+          "path": "/snippets/reactjs-snippet",
+          "icon": "braces",
+          "external": false
+        },
+        {
+          "title": "ReactJS snippet code",
+          "path": "/snippets/reactjs-snippet-code",
+          "icon": "braces",
+          "external": false
+        },
+        {
+          "title": "TypeScript",
+          "path": "/snippets/typescript-snippet",
+          "icon": "braces",
+          "external": false
+        }
+      ]
     },
     {
       "title": "GitHub",
@@ -53,12 +121,15 @@
     }
   ],
   "plugins": {
+    "search": {},
     "git": {
       "commitHistory": true,
       "maxCommits": 5
     },
     "seo": {
       "defaultDescription": "Documentation built with docmd."
-    }
+    },
+    "sitemap": {},
+    "mermaid": {}
   }
 }

@@ -1447,4 +1447,4 @@ class TradingPipeline:
 
 ---
 
-*Modern Python (3.11+) patterns: use `dataclass` for DTOs, `Protocol` for interfaces, `Pydantic` for validation, `Context managers` for resource safety, `asyncio` for concurrency, and `pyproject.toml` for configuration. Keep I/O separated from business logic.*
+_Modern Python (3.11+) patterns: use `dataclass` for DTOs, `Protocol` for interfaces, `Pydantic` for validation, `Context managers` for resource safety, `asyncio` for concurrency, and `pyproject.toml` for configuration. Keep I/O separated from business logic._

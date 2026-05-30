@@ -11,11 +11,10 @@ A personal, organized collection of reusable code snippets covering multiple lan
 
 Browse snippets by category on the left, or use the search bar to find exactly what you need.
 
-
 ## Browse by Category
 
 | Category       | Description                                |
-|----------------|--------------------------------------------|
+| -------------- | ------------------------------------------ |
 | **Utilities**  | Helper functions, debounce, throttle, etc. |
 | **Algorithms** | Sorting, searching, tree traversal         |
 | **Config**     | dotfiles, ESLint, Prettier, tsconfig       |
@@ -27,6 +26,7 @@ Browse snippets by category on the left, or use the search bar to find exactly w
 
 ::: tabs
 == tab "JavaScript"
+
 ```javascript
 const memoize = (fn) => {
   const cache = new Map();
@@ -41,6 +41,7 @@ const memoize = (fn) => {
 ```
 
 == tab "Python"
+
 ```python
 from functools import lru_cache
 
@@ -50,6 +51,7 @@ def fibonacci(n):
         return n
     return fibonacci(n-1) + fibonacci(n-2)
 ```
+
 :::
 
 ## Quick Links

@@ -1,35 +1,5 @@
 # JavaScript Snippets
 
-## Table of Contents
-
-1. [Array Utilities](#1-array-utilities)
-2. [Object Utilities](#2-object-utilities)
-3. [String Utilities](#3-string-utilities)
-4. [Number Utilities](#4-number-utilities)
-5. [Function Utilities](#5-function-utilities)
-6. [Async / Promise Patterns](#6-async--promise-patterns)
-7. [Fetch API & HTTP](#7-fetch-api--http)
-8. [Event Handling (DOM)](#8-event-handling-dom)
-9. [Timers & Intervals](#9-timers--intervals)
-10. [Classes & Prototypes](#10-classes--prototypes)
-11. [Maps, Sets & Weak Collections](#11-maps-sets--weak-collections)
-12. [Generators & Iterators](#12-generators--iterators)
-13. [Proxy & Reflect](#13-proxy--reflect)
-14. [Date & Time](#14-date--time)
-15. [Storage (localStorage / sessionStorage)](#15-storage-localstorage--sessionstorage)
-16. [Cookies](#16-cookies)
-17. [Regular Expressions](#17-regular-expressions)
-18. [Validation Utilities](#18-validation-utilities)
-19. [DOM Manipulation](#19-dom-manipulation)
-20. [URL & Query String](#20-url--query-string)
-21. [Design Patterns](#21-design-patterns)
-22. [Data Structures](#22-data-structures)
-23. [Error Handling](#23-error-handling)
-24. [Logging & Debugging](#24-logging--debugging)
-25. [Polyfills & Compatibility](#25-polyfills--compatibility)
-
----
-
 ## 1. Array Utilities
 
 ### Unique values

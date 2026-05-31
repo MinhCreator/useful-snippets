@@ -1,35 +1,5 @@
 # TypeScript Snippets
 
-## Table of Contents
-
-1. [Basic Types & Interfaces](#1-basic-types--interfaces)
-2. [Utility Types](#2-utility-types)
-3. [Generics](#3-generics)
-4. [Type Guards & Narrowing](#4-type-guards--narrowing)
-5. [Mapped Types](#5-mapped-types)
-6. [Conditional Types](#6-conditional-types)
-7. [Template Literal Types](#7-template-literal-types)
-8. [Discriminated Unions](#8-discriminated-unions)
-9. [Enums & Const Enums](#9-enums--const-enums)
-10. [Functions & Overloads](#10-functions--overloads)
-11. [Classes & Mixins](#11-classes--mixins)
-12. [Decorators](#12-decorators)
-13. [Branded Types](#13-branded-types)
-14. [Assertion Functions](#14-assertion-functions)
-15. [The satisfies Operator](#15-the-satisfies-operator)
-16. [Satisfies + as const](#16-satisfies--as-const)
-17. [Nominal Typing Patterns](#17-nominal-typing-patterns)
-18. [Builder Pattern](#18-builder-pattern)
-19. [Result / Either Type](#19-result--either-type)
-20. [Option / Maybe Type](#20-option--maybe-type)
-21. [Async Patterns](#21-async-patterns)
-22. [API Client Patterns](#22-api-client-patterns)
-23. [Event Emitter](#23-event-emitter)
-24. [Dependency Injection](#24-dependency-injection)
-25. [Configuration & Environment](#25-configuration--environment)
-
----
-
 ## 1. Basic Types & Interfaces
 
 ### Primitives & basic types

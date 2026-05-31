@@ -4,7 +4,13 @@
   "src": "docs",
   "out": "site",
   "base": "/",
-  "favicon": "/assets/favicon.ico",
+  "favicon": "assets/favicon.ico",
+  "logo": {
+    "light": "assets/images/logo-dark.svg",
+    "dark": "assets/images/logo-light.svg",
+    "href": "/",
+    "alt": "quick snippets"
+  },
   "engine": "js",
   "layout": {
     "spa": true,

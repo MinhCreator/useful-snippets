@@ -1,35 +1,5 @@
 # Java Snippets
 
-## Table of Contents
-
-1. [Basic Syntax](#1-basic-syntax)
-2. [Strings](#2-strings)
-3. [Collections & Streams](#3-collections--streams)
-4. [Date & Time (java.time)](#4-date--time-javatime)
-5. [File I/O](#5-file-io)
-6. [Exception Handling](#6-exception-handling)
-7. [Generics](#7-generics)
-8. [Enums](#8-enums)
-9. [Annotations](#9-annotations)
-10. [OOP — Classes & Inheritance](#10-oop--classes--inheritance)
-11. [OOP — Interfaces & Abstract Classes](#11-oop--interfaces--abstract-classes)
-12. [OOP — Polymorphism](#12-oop--polymorphism)
-13. [OOP — Composition](#13-oop--composition)
-14. [OOP — Builder Pattern](#14-oop--builder-pattern)
-15. [OOP — Factory Pattern](#15-oop--factory-pattern)
-16. [OOP — Singleton](#16-oop--singleton)
-17. [OOP — Strategy Pattern](#17-oop--strategy-pattern)
-18. [OOP — Observer Pattern](#18-oop--observer-pattern)
-19. [OOP — Decorator Pattern](#19-oop--decorator-pattern)
-20. [Functional Programming (Streams & Lambdas)](#20-functional-programming-streams--lambdas)
-21. [Optional](#21-optional)
-22. [Concurrency & Threading](#22-concurrency--threading)
-23. [Records (Java 16+)](#23-records-java-16)
-24. [Sealed Classes (Java 17+)](#24-sealed-classes-java-17)
-25. [Pattern Matching (Java 17+/21+)](#25-pattern-matching-java-1721)
-
----
-
 ## 1. Basic Syntax
 
 ### Hello World
